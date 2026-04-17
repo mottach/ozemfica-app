@@ -133,6 +133,22 @@ nav{flex:1;padding:10px 8px}
 .theme-btn:hover{background:var(--surface2)}
 .change-role-btn{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-size:12px;color:var(--muted);background:none;border:none;width:100%;cursor:pointer;margin-bottom:4px}
 .change-role-btn:hover{background:var(--surface2)}
+.patient-switcher{padding:8px 10px 4px;position:relative}
+.patient-switcher-btn{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:background .15s}
+.patient-switcher-btn:hover{background:var(--surface3,#e8e4dc)}
+.patient-avatar{width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.patient-switcher-info{flex:1;min-width:0;text-align:left}
+.patient-switcher-name{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.patient-switcher-sub{font-size:10px;color:var(--muted);margin-top:1px}
+.patient-switcher-caret{color:var(--muted);flex-shrink:0;transition:transform .2s}
+.patient-dropdown{position:absolute;top:calc(100% - 4px);left:10px;right:10px;background:var(--bg);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:200;overflow:hidden;display:none}
+.patient-dropdown.open{display:block}
+.patient-dropdown-item{display:flex;align-items:center;gap:8px;padding:9px 12px;cursor:pointer;transition:background .12s}
+.patient-dropdown-item:hover{background:var(--surface2)}
+.patient-dropdown-item.active-patient{background:var(--primary-soft,#F1D9CC)}
+.patient-dropdown-item .pd-avatar{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.patient-dropdown-item .pd-name{font-size:12px;font-weight:600;color:var(--text)}
+.patient-dropdown-item .pd-phase{font-size:10px;color:var(--muted)}
 
 /* Cards & grid */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
@@ -834,6 +850,77 @@ const state = {
     alerts: [],
   },
   // PATIENT
+  activePatientId: 1,
+  patientProfiles: [
+    {
+      id: 1, name: 'Maria Silva', currentWeight: 72.5, targetWeight: 68,
+      glp1StartDate: '2023-12-01', glp1EndDate: '2024-06-01', glp1Phase: 'manutencao', height: 165, age: 38, sex: 'feminino',
+      activityLevel: 'moderado',
+      myTeam: [
+        {id:1, name:'Dr. Carlos Mendes', role:'medico', specialty:'Endocrinologia', since:'2026-01-10'},
+        {id:2, name:'Prof. Lucas Ferreira', role:'treinador', specialty:'Educação Física', since:'2026-02-01'},
+        {id:3, name:'Dra. Fernanda Lima', role:'nutricionista', specialty:'Nutrição Clínica', since:'2026-01-15'},
+      ],
+      pendingInvites: [],
+      weights: [
+        {id:1,date:'2025-10-18',weight:89.2,note:''},{id:2,date:'2025-11-17',weight:86.5,note:''},
+        {id:3,date:'2025-12-17',weight:83.1,note:''},{id:4,date:'2026-01-16',weight:80.4,note:''},
+        {id:5,date:'2026-02-15',weight:77.8,note:''},{id:6,date:'2026-03-02',weight:76.2,note:''},
+        {id:7,date:'2026-03-17',weight:74.9,note:''},{id:8,date:'2026-04-02',weight:73.5,note:''},
+        {id:9,date:'2026-04-09',weight:72.9,note:''},{id:10,date:'2026-04-16',weight:72.5,note:''},
+      ],
+    },
+    {
+      id: 2, name: 'João Costa', currentWeight: 88.1, targetWeight: 82,
+      glp1StartDate: '2024-03-01', glp1EndDate: '2024-09-15', glp1Phase: 'manutencao', height: 178, age: 45, sex: 'masculino',
+      activityLevel: 'baixo',
+      myTeam: [
+        {id:2, name:'Prof. Lucas Ferreira', role:'treinador', specialty:'Educação Física', since:'2026-02-10'},
+      ],
+      pendingInvites: [{id:1, role:'medico', email:'carlos@synapse.com', sentAt:'2026-04-10'}],
+      weights: [
+        {id:1,date:'2025-10-01',weight:97.3,note:''},{id:2,date:'2025-11-01',weight:95.1,note:''},
+        {id:3,date:'2025-12-01',weight:93.2,note:''},{id:4,date:'2026-01-01',weight:91.8,note:''},
+        {id:5,date:'2026-02-01',weight:90.4,note:''},{id:6,date:'2026-03-01',weight:89.2,note:''},
+        {id:7,date:'2026-03-15',weight:88.9,note:''},{id:8,date:'2026-04-01',weight:88.5,note:''},
+        {id:9,date:'2026-04-08',weight:88.3,note:''},{id:10,date:'2026-04-16',weight:88.1,note:''},
+      ],
+    },
+    {
+      id: 3, name: 'Ana Rodrigues', currentWeight: 65.0, targetWeight: 63,
+      glp1StartDate: '2023-09-01', glp1EndDate: '2024-03-20', glp1Phase: 'manutencao', height: 162, age: 52, sex: 'feminino',
+      activityLevel: 'intenso',
+      myTeam: [
+        {id:1, name:'Dr. Carlos Mendes', role:'medico', specialty:'Endocrinologia', since:'2025-10-01'},
+        {id:2, name:'Prof. Lucas Ferreira', role:'treinador', specialty:'Educação Física', since:'2025-10-15'},
+        {id:3, name:'Dra. Fernanda Lima', role:'nutricionista', specialty:'Nutrição Clínica', since:'2025-11-01'},
+      ],
+      pendingInvites: [],
+      weights: [
+        {id:1,date:'2025-10-01',weight:76.3,note:''},{id:2,date:'2025-11-01',weight:73.5,note:''},
+        {id:3,date:'2025-12-01',weight:71.2,note:''},{id:4,date:'2026-01-01',weight:69.4,note:''},
+        {id:5,date:'2026-02-01',weight:67.8,note:''},{id:6,date:'2026-03-01',weight:66.5,note:''},
+        {id:7,date:'2026-03-15',weight:65.9,note:''},{id:8,date:'2026-04-01',weight:65.4,note:''},
+        {id:9,date:'2026-04-08',weight:65.2,note:''},{id:10,date:'2026-04-16',weight:65.0,note:''},
+      ],
+    },
+    {
+      id: 4, name: 'Pedro Santos', currentWeight: 94.2, targetWeight: 88,
+      glp1StartDate: '2024-05-01', glp1EndDate: '2024-11-10', glp1Phase: 'transicao', height: 172, age: 61, sex: 'masculino',
+      activityLevel: 'sedentario',
+      myTeam: [
+        {id:1, name:'Dr. Carlos Mendes', role:'medico', specialty:'Endocrinologia', since:'2026-03-01'},
+      ],
+      pendingInvites: [],
+      weights: [
+        {id:1,date:'2025-10-01',weight:101.3,note:''},{id:2,date:'2025-11-01',weight:100.5,note:''},
+        {id:3,date:'2025-12-01',weight:99.8,note:''},{id:4,date:'2026-01-01',weight:98.4,note:''},
+        {id:5,date:'2026-02-01',weight:97.1,note:''},{id:6,date:'2026-03-01',weight:96.2,note:''},
+        {id:7,date:'2026-03-15',weight:95.6,note:''},{id:8,date:'2026-04-01',weight:95.1,note:''},
+        {id:9,date:'2026-04-08',weight:94.7,note:''},{id:10,date:'2026-04-16',weight:94.2,note:''},
+      ],
+    },
+  ],
   profile: {
     name: 'Maria Silva', currentWeight: 72.5, targetWeight: 68,
     glp1StartDate: '2023-12-01', glp1EndDate: '2024-06-01', glp1Phase: 'manutencao', height: 165, age: 38, sex: 'feminino',
@@ -1474,7 +1561,12 @@ function selectRole(role) {
   // close any open modals
   const mm = document.getElementById('memed-modal');
   if (mm) mm.style.display = 'none';
-  if (role === 'paciente') state.page = 'dashboard';
+  if (role === 'paciente') {
+    state.page = 'dashboard';
+    // Load the active patient profile weights on entry
+    const activePProf = (state.patientProfiles||[]).find(p=>p.id===(state.activePatientId||1));
+    if (activePProf && activePProf.weights) state.weights = activePProf.weights;
+  }
   else if (role === 'medico') state.page = 'medico_dashboard';
   else if (role === 'treinador') state.page = 'trainer_dashboard';
   else if (role === 'nutricionista') state.page = 'nutri_dashboard';
@@ -1486,6 +1578,51 @@ function goBack() {
   state.role = null;
   render();
 }
+
+// ─── PATIENT PROFILE SWITCHER ────────────────────────────────────────────────
+function switchPatientProfile(id) {
+  const prof = state.patientProfiles.find(p => p.id === id);
+  if (!prof) return;
+  state.activePatientId = id;
+  // Merge profile fields
+  state.profile = {
+    ...state.profile,
+    name: prof.name,
+    currentWeight: prof.currentWeight,
+    targetWeight: prof.targetWeight,
+    glp1StartDate: prof.glp1StartDate,
+    glp1EndDate: prof.glp1EndDate,
+    glp1Phase: prof.glp1Phase,
+    height: prof.height,
+    age: prof.age,
+    sex: prof.sex,
+    activityLevel: prof.activityLevel,
+    myTeam: prof.myTeam,
+    pendingInvites: prof.pendingInvites,
+  };
+  // Swap weight history
+  if (prof.weights) state.weights = prof.weights;
+  // Reset transient state
+  state.calcForm = null;
+  state.page = 'dashboard';
+  // Close dropdown
+  const dd = document.getElementById('patient-switcher-dropdown');
+  if (dd) dd.classList.remove('open');
+  render();
+}
+
+function togglePatientDropdown(e) {
+  e.stopPropagation();
+  const dd = document.getElementById('patient-switcher-dropdown');
+  if (!dd) return;
+  dd.classList.toggle('open');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function() {
+  const dd = document.getElementById('patient-switcher-dropdown');
+  if (dd) dd.classList.remove('open');
+});
 
 // ─── SIDEBAR ─────────────────────────────────────────────────────────────────
 function renderSidebar() {
@@ -1582,6 +1719,36 @@ function renderSidebar() {
   const roleColor = role === 'medico' ? 'var(--doctor)' : role === 'treinador' ? 'var(--trainer)' : role === 'nutricionista' ? 'var(--nutri)' : 'var(--primary)';
   const roleName = role === 'medico' ? 'Portal Médico' : role === 'treinador' ? 'Portal Treinador' : role === 'nutricionista' ? 'Portal Nutricional' : 'Ciclo Completo GLP-1';
 
+  // Build patient picker HTML only for paciente role
+  const patientPickerHTML = (role === 'paciente' || role === 'ai_coach') ? (() => {
+    const profiles = state.patientProfiles || [];
+    const activeId = state.activePatientId || 1;
+    const active = profiles.find(p => p.id === activeId) || profiles[0];
+    if (!active || profiles.length <= 1) return '';
+    const initials = active.name.split(' ').map(w=>w[0]).slice(0,2).join('');
+    const phaseLabels = {inicio:'Início',adaptacao:'Adaptação',manutencao:'Manutenção',transicao:'Transição',reganho:'Reganho'};
+    const phaseLabel = phaseLabels[active.glp1Phase] || active.glp1Phase;
+    const items = profiles.map(p => {
+      const ini = p.name.split(' ').map(w=>w[0]).slice(0,2).join('');
+      const ph = phaseLabels[p.glp1Phase] || p.glp1Phase;
+      return `<div class="patient-dropdown-item${p.id===activeId?' active-patient':''}" onclick="switchPatientProfile(${p.id})">
+        <div class="pd-avatar">${ini}</div>
+        <div><div class="pd-name">${p.name}</div><div class="pd-phase">${ph} · ${p.currentWeight}kg</div></div>
+      </div>`;
+    }).join('');
+    return `<div class="patient-switcher">
+      <button class="patient-switcher-btn" onclick="togglePatientDropdown(event)">
+        <div class="patient-avatar">${initials}</div>
+        <div class="patient-switcher-info">
+          <div class="patient-switcher-name">${active.name}</div>
+          <div class="patient-switcher-sub">${phaseLabel} · ${active.currentWeight}kg</div>
+        </div>
+        <svg class="patient-switcher-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="patient-dropdown" id="patient-switcher-dropdown">${items}</div>
+    </div>`;
+  })() : '';
+
   el.innerHTML = `
     <div class="logo">
       <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
@@ -1593,6 +1760,7 @@ function renderSidebar() {
         <div class="logo-sub">${roleName}</div>
       </div>
     </div>
+    ${patientPickerHTML}
     <nav class="${navClass}">${navItems}</nav>
     <div class="sidebar-footer">
       <button class="change-role-btn" onclick="goBack()">
