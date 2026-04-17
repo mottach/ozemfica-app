@@ -920,6 +920,34 @@ const state = {
         {id:9,date:'2026-04-08',weight:94.7,note:''},{id:10,date:'2026-04-16',weight:94.2,note:''},
       ],
     },
+    {
+      id: 5, name: 'Carlos Motta', currentWeight: 98.0, targetWeight: 90,
+      glp1StartDate: '2024-02-01', glp1EndDate: '2024-08-01', glp1Phase: 'manutencao', height: 180, age: 42, sex: 'masculino',
+      activityLevel: 'moderado',
+      myTeam: [
+        {id:1, name:'Dr. Carlos Mendes', role:'medico', specialty:'Endocrinologia', since:'2026-01-05'},
+        {id:3, name:'Dra. Fernanda Lima', role:'nutricionista', specialty:'Nutrição Clínica', since:'2026-02-01'},
+      ],
+      pendingInvites: [],
+      weights: [
+        {id:1,date:'2025-10-01',weight:112.5,note:''},{id:2,date:'2025-11-01',weight:110.2,note:''},
+        {id:3,date:'2025-12-01',weight:107.8,note:''},{id:4,date:'2026-01-01',weight:105.3,note:''},
+        {id:5,date:'2026-02-01',weight:103.1,note:''},{id:6,date:'2026-03-01',weight:101.4,note:''},
+        {id:7,date:'2026-03-15',weight:100.2,note:''},{id:8,date:'2026-04-01',weight:99.1,note:''},
+        {id:9,date:'2026-04-08',weight:98.6,note:''},{id:10,date:'2026-04-16',weight:98.0,note:''},
+      ],
+    },
+    {
+      id: 6, name: 'Yuri Braga', currentWeight: 70.0, targetWeight: 65,
+      glp1StartDate: '2026-04-10', glp1EndDate: '2026-10-10', glp1Phase: 'inicio', height: 174, age: 29, sex: 'masculino',
+      activityLevel: 'leve',
+      myTeam: [],
+      pendingInvites: [],
+      weights: [
+        {id:1,date:'2026-04-10',weight:70.0,note:'Início do tratamento GLP-1'},
+        {id:2,date:'2026-04-16',weight:70.0,note:''},
+      ],
+    },
   ],
   profile: {
     name: 'Maria Silva', currentWeight: 72.5, targetWeight: 68,
@@ -1330,6 +1358,22 @@ const state = {
           { id: 5, from: 'treinador', author: 'Prof. Lucas Ferreira', role: 'treinador', time: '10:45', date: '2026-04-16', text: 'Treinou hoje! Primeira vez em 2 semanas. Curto (25min caminhada), mas veio. Progresso! 💪' },
         ]
       },
+      {
+        id: 5, patientId: 5, patientName: 'Carlos Motta', patientAge: 42, weight: 98.0,
+        unread: { medico: 0, treinador: 0, nutricionista: 1 },
+        messages: [
+          { id: 1, from: 'medico', author: 'Dr. Carlos Mendes', role: 'medico', time: '10:00', date: '2026-04-15', text: 'Carlos em fase de manutenção. Peso estável em 98kg. Bom progresso desde fevereiro.' },
+          { id: 2, from: 'nutricionista', author: 'Dra. Fernanda Lima', role: 'nutricionista', time: '10:30', date: '2026-04-15', text: 'Adesão de 65%. Precisamos melhorar a ingestão proteica — ainda abaixo da meta de 115g. Sugiro incluir whey no lanche.' },
+        ]
+      },
+      {
+        id: 6, patientId: 6, patientName: 'Yuri Braga', patientAge: 29, weight: 70.0,
+        unread: { medico: 1, treinador: 0, nutricionista: 0 },
+        messages: [
+          { id: 1, from: 'medico', author: 'Dr. Carlos Mendes', role: 'medico', time: '09:00', date: '2026-04-10', text: 'Yuri iniciando tratamento GLP-1 hoje. Fase de adaptação esperada nas primeiras semanas. Monitorar efeitos colaterais gastrointestinais.' },
+          { id: 2, from: 'medico', author: 'Dr. Carlos Mendes', role: 'medico', time: '08:00', date: '2026-04-17', text: 'Yuri, como está se sentindo nessa primeira semana? Algum enjoo ou desconforto?' },
+        ]
+      },
     ]
   },
   selectedMealDate: new Date().toISOString().split('T')[0],
@@ -1364,6 +1408,12 @@ const state = {
       {id:1,date:'2026-04-06',type:'consulta',role:'medico',author:'Dr. Carlos Mendes',text:'Alerta de reganho: +1.2kg/semana. Avaliado risco cardiovascular. Reforçar atividade física leve diária. Retornar em 2 semanas.'},
       {id:2,date:'2026-04-07',type:'whatsapp',role:'medico',author:'Dr. Carlos Mendes',text:'Pedro, boa tarde! Lembre-se de caminhar pelo menos 20 minutos hoje. Pequenos passos fazem grande diferença! Estamos junto nessa. 💪'},
     ]},
+    {id:5,name:'Carlos Motta',age:42,lastWeight:98.0,targetWeight:90,lost:14.5,trend:-0.3,glp1Start:'2024-02-01',glp1End:'2024-08-01',glp1Phase:'manutencao',protein:72,fiber:20,exerciseAdherence:65,alerts:[],notes:'',suggestions:'',phone:'5511955005005',status:'active',invitePending:false,team:['medico','nutricionista'],email:'carlos.motta@email.com',clinicalHistory:[
+      {id:1,date:'2026-04-15',type:'consulta',role:'medico',author:'Dr. Carlos Mendes',text:'Carlos em fase de manutenção. Peso estável. Orientado sobre importância de manter atividade física regular e ingestão proteica adequada.'},
+    ]},
+    {id:6,name:'Yuri Braga',age:29,lastWeight:70.0,targetWeight:65,lost:0,trend:0,glp1Start:'2026-04-10',glp1End:'2026-10-10',glp1Phase:'inicio',protein:45,fiber:12,exerciseAdherence:50,alerts:['proteina_baixa','fibra_baixa'],notes:'',suggestions:'',phone:'5511944006006',status:'active',invitePending:false,team:[],email:'yuri.braga@email.com',clinicalHistory:[
+      {id:1,date:'2026-04-10',type:'consulta',role:'medico',author:'Dr. Carlos Mendes',text:'Primeira consulta. Paciente iniciando tratamento com GLP-1. Orientado sobre efeitos colaterais da fase inicial, importância da hidratação e proteína. Retorno em 4 semanas.'},
+    ]},
   ],
 
   // TRAINER
@@ -1384,6 +1434,13 @@ const state = {
     ],notes:'',trainerSuggestions:''},
     {id:4,name:'Pedro Santos',age:61,weight:94.2,goal:'perda_peso',adherence:20,sessionsWeek:1,targetSessions:4,lastSession:'2026-04-06',phone:'5511966004004',status:'active',invitePending:false,team:['medico'],email:'pedro.santos@email.com',clinicalHistory:[],exercises:[
       {name:'Caminhada leve',type:'cardio',days:['ter','qui','sab','dom'],duration:20,completedThisWeek:1,targetWeek:4},
+    ],notes:'',trainerSuggestions:''},
+    {id:5,name:'Carlos Motta',age:42,weight:98.0,goal:'manutencao_peso',adherence:65,sessionsWeek:3,targetSessions:4,lastSession:'2026-04-15',phone:'5511955005005',status:'active',invitePending:false,team:['medico','nutricionista'],email:'carlos.motta@email.com',clinicalHistory:[],exercises:[
+      {name:'Musculação',type:'forca',days:['seg','qua','sex'],duration:50,completedThisWeek:2,targetWeek:3},
+      {name:'Caminhada',type:'cardio',days:['ter','qui'],duration:35,completedThisWeek:1,targetWeek:2},
+    ],notes:'',trainerSuggestions:''},
+    {id:6,name:'Yuri Braga',age:29,weight:70.0,goal:'perda_peso',adherence:50,sessionsWeek:2,targetSessions:3,lastSession:'2026-04-14',phone:'5511944006006',status:'active',invitePending:false,team:[],email:'yuri.braga@email.com',clinicalHistory:[],exercises:[
+      {name:'Caminhada',type:'cardio',days:['ter','qui','sab'],duration:30,completedThisWeek:2,targetWeek:3},
     ],notes:'',trainerSuggestions:''},
   ],
   workoutAssignments:{},
@@ -1492,6 +1549,55 @@ const state = {
         {date:'2026-04-14',kcal:2800,prot:44,carb:340,gord:112,fibra:7},
         {date:'2026-04-15',kcal:2620,prot:52,carb:315,gord:104,fibra:9},
         {date:'2026-04-16',kcal:2650,prot:48,carb:320,gord:105,fibra:8},
+      ],
+    },
+    {
+      id:5, name:'Carlos Motta', age:42, weight:98.0, height:180, sex:'masculino', goal:'manutencao_peso', phone:'5511955005005', status:'active', invitePending:false, team:['medico'], email:'carlos.motta@email.com', clinicalHistory:[],
+      tmb:1920, tdee:2690, kcalMeta:2200, protMeta:115, carbMeta:220, gordMeta:68, fibraMeta:30,
+      adherence:65,
+      weeklyAvg:{kcal:2050, prot:72, carb:200, gord:65, fibra:20},
+      alerts:[],
+      lastConsult:'2026-04-15',
+      nextConsult:'2026-05-15',
+      notes:'',
+      nutriSuggestions:'',
+      dietPlan:[
+        {meal:'Café da manhã', time:'07:00', foods:['3 ovos mexidos (18g prot)','Aveia 50g (5g fibra)','Fruta'], kcal:480, prot:25, carb:48, gord:16},
+        {meal:'Almoço', time:'12:30', foods:['180g frango (48g prot)','Arroz integral 150g','Salada completa','Legumes'], kcal:620, prot:52, carb:56, gord:14},
+        {meal:'Lanche', time:'16:00', foods:['Whey protein (25g prot)','Banana'], kcal:240, prot:26, carb:28, gord:2},
+        {meal:'Jantar', time:'19:30', foods:['150g peixe (35g prot)','Batata doce','Brócolis'], kcal:480, prot:38, carb:42, gord:10},
+      ],
+      history:[
+        {date:'2026-04-09',kcal:2080,prot:70,carb:202,gord:66,fibra:19},
+        {date:'2026-04-10',kcal:2120,prot:74,carb:210,gord:68,fibra:21},
+        {date:'2026-04-11',kcal:1980,prot:68,carb:195,gord:62,fibra:18},
+        {date:'2026-04-14',kcal:2060,prot:71,carb:204,gord:65,fibra:20},
+        {date:'2026-04-15',kcal:2040,prot:73,carb:200,gord:64,fibra:21},
+        {date:'2026-04-16',kcal:2050,prot:72,carb:200,gord:65,fibra:20},
+      ],
+    },
+    {
+      id:6, name:'Yuri Braga', age:29, weight:70.0, height:174, sex:'masculino', goal:'perda_peso', phone:'5511944006006', status:'active', invitePending:false, team:[], email:'yuri.braga@email.com', clinicalHistory:[],
+      tmb:1680, tdee:2185, kcalMeta:1700, protMeta:105, carbMeta:160, gordMeta:50, fibraMeta:28,
+      adherence:50,
+      weeklyAvg:{kcal:1820, prot:45, carb:200, gord:62, fibra:12},
+      alerts:['proteina_baixa','fibra_baixa'],
+      lastConsult:'2026-04-10',
+      nextConsult:'2026-05-08',
+      notes:'Paciente iniciando. Adaptação ao GLP-1 em andamento. Foco em proteína e fibra.',
+      nutriSuggestions:'',
+      dietPlan:[
+        {meal:'Café da manhã', time:'08:00', foods:['2 ovos (12g prot)','Pão integral','Iogurte grego (10g prot)'], kcal:380, prot:24, carb:36, gord:12},
+        {meal:'Almoço', time:'12:30', foods:['130g frango (35g prot)','Arroz integral','Feijão (5g fibra)','Salada'], kcal:540, prot:40, carb:58, gord:12},
+        {meal:'Lanche', time:'16:00', foods:['Fruta + castanhas'], kcal:180, prot:4, carb:24, gord:8},
+        {meal:'Jantar', time:'19:30', foods:['120g carne magra (30g prot)','Legumes no vapor','Batata doce'], kcal:440, prot:34, carb:44, gord:12},
+      ],
+      history:[
+        {date:'2026-04-10',kcal:1900,prot:44,carb:210,gord:65,fibra:11},
+        {date:'2026-04-11',kcal:1780,prot:46,carb:198,gord:60,fibra:12},
+        {date:'2026-04-14',kcal:1850,prot:45,carb:205,gord:62,fibra:12},
+        {date:'2026-04-15',kcal:1820,prot:47,carb:200,gord:61,fibra:13},
+        {date:'2026-04-16',kcal:1800,prot:45,carb:200,gord:62,fibra:12},
       ],
     },
   ],
