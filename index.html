@@ -939,7 +939,7 @@ const state = {
     },
     {
       id: 6, name: 'Yuri Braga', currentWeight: 70.0, targetWeight: 65,
-      glp1StartDate: '2026-04-10', glp1EndDate: '2026-10-10', glp1Phase: 'inicio', height: 174, age: 29, sex: 'masculino',
+      glp1StartDate: '2026-10-10', glp1EndDate: '2026-10-10', glp1Phase: 'pre_tratamento', height: 174, age: 29, sex: 'masculino',
       activityLevel: 'leve',
       myTeam: [],
       pendingInvites: [],
@@ -1370,7 +1370,7 @@ const state = {
         id: 6, patientId: 6, patientName: 'Yuri Braga', patientAge: 29, weight: 70.0,
         unread: { medico: 1, treinador: 0, nutricionista: 0 },
         messages: [
-          { id: 1, from: 'medico', author: 'Dr. Carlos Mendes', role: 'medico', time: '09:00', date: '2026-04-10', text: 'Yuri iniciando tratamento GLP-1 hoje. Fase de adaptação esperada nas primeiras semanas. Monitorar efeitos colaterais gastrointestinais.' },
+          { id: 1, from: 'medico', author: 'Dr. Carlos Mendes', role: 'medico', time: '09:00', date: '2026-04-10', text: 'Yuri em fase de pré-tratamento. Exames laboratoriais solicitados. Início do GLP-1 previsto para outubro/2026. Recomendo encaminhar para nutricionista para preparo nutricional.' },
           { id: 2, from: 'medico', author: 'Dr. Carlos Mendes', role: 'medico', time: '08:00', date: '2026-04-17', text: 'Yuri, como está se sentindo nessa primeira semana? Algum enjoo ou desconforto?' },
         ]
       },
@@ -1411,8 +1411,8 @@ const state = {
     {id:5,name:'Carlos Motta',age:42,lastWeight:98.0,targetWeight:90,lost:14.5,trend:-0.3,glp1Start:'2024-02-01',glp1End:'2024-08-01',glp1Phase:'manutencao',protein:72,fiber:20,exerciseAdherence:65,alerts:[],notes:'',suggestions:'',phone:'5511955005005',status:'active',invitePending:false,team:['medico','nutricionista'],email:'carlos.motta@email.com',clinicalHistory:[
       {id:1,date:'2026-04-15',type:'consulta',role:'medico',author:'Dr. Carlos Mendes',text:'Carlos em fase de manutenção. Peso estável. Orientado sobre importância de manter atividade física regular e ingestão proteica adequada.'},
     ]},
-    {id:6,name:'Yuri Braga',age:29,lastWeight:70.0,targetWeight:65,lost:0,trend:0,glp1Start:'2026-04-10',glp1End:'2026-10-10',glp1Phase:'inicio',protein:45,fiber:12,exerciseAdherence:50,alerts:['proteina_baixa','fibra_baixa'],notes:'',suggestions:'',phone:'5511944006006',status:'active',invitePending:false,team:[],email:'yuri.braga@email.com',clinicalHistory:[
-      {id:1,date:'2026-04-10',type:'consulta',role:'medico',author:'Dr. Carlos Mendes',text:'Primeira consulta. Paciente iniciando tratamento com GLP-1. Orientado sobre efeitos colaterais da fase inicial, importância da hidratação e proteína. Retorno em 4 semanas.'},
+    {id:6,name:'Yuri Braga',age:29,lastWeight:70.0,targetWeight:65,lost:0,trend:0,glp1Start:'2026-10-10',glp1End:'2026-10-10',glp1Phase:'pre_tratamento',protein:45,fiber:12,exerciseAdherence:50,alerts:['proteina_baixa','fibra_baixa'],notes:'',suggestions:'',phone:'5511944006006',status:'active',invitePending:false,team:[],email:'yuri.braga@email.com',clinicalHistory:[
+      {id:1,date:'2026-04-10',type:'consulta',role:'medico',author:'Dr. Carlos Mendes',text:'Primeira consulta. Paciente em fase de pré-tratamento — avaliação clínica, exames laboratoriais solicitados. Início do GLP-1 previsto para outubro/2026. Orientado sobre nutrição anti-inflamatória e atividade física base.'},
     ]},
   ],
 
@@ -1584,7 +1584,7 @@ const state = {
       alerts:['proteina_baixa','fibra_baixa'],
       lastConsult:'2026-04-10',
       nextConsult:'2026-05-08',
-      notes:'Paciente iniciando. Adaptação ao GLP-1 em andamento. Foco em proteína e fibra.',
+      notes:'Pré-tratamento: início do GLP-1 previsto para outubro/2026. Foco em preparo nutricional anti-inflamatório, aumento de proteína e fibra antes do início.',
       nutriSuggestions:'',
       dietPlan:[
         {meal:'Café da manhã', time:'08:00', foods:['2 ovos (12g prot)','Pão integral','Iogurte grego (10g prot)'], kcal:380, prot:24, carb:36, gord:12},
@@ -1832,7 +1832,7 @@ function renderSidebar() {
     const active = profiles.find(p => p.id === activeId) || profiles[0];
     if (!active || profiles.length <= 1) return '';
     const initials = active.name.split(' ').map(w=>w[0]).slice(0,2).join('');
-    const phaseLabels = {inicio:'Início',adaptacao:'Adaptação',manutencao:'Manutenção',transicao:'Transição',reganho:'Reganho'};
+    const phaseLabels = {pre_tratamento:'Pré-tratamento',inicio:'Início',adaptacao:'Adaptação',manutencao:'Manutenção',transicao:'Transição',reganho:'Reganho'};
     const phaseLabel = phaseLabels[active.glp1Phase] || active.glp1Phase;
     const items = profiles.map(p => {
       const ini = p.name.split(' ').map(w=>w[0]).slice(0,2).join('');
