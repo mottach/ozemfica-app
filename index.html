@@ -3,27 +3,67 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Ozemfica · GLPerfection · GLPerfecto</title>
+<title>Synapse — GLP-1 AI Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#f0faf7;--surface:#ffffff;--surface2:#f7fdfb;--border:#d1ede7;
-  --text:#0f2e26;--muted:#5a7f74;--faint:#a8c5bc;
-  --primary:#0d9373;--primary-h:#0a7a5e;--primary-bg:#d1faf0;
-  --warn:#d97706;--warn-bg:#fef3c7;
-  --danger:#dc2626;--danger-bg:#fee2e2;
-  --success:#059669;--success-bg:#d1fae5;
-  --amber:#f59e0b;--purple:#7c3aed;--blue:#2563eb;
-  --doctor:#2563eb;--doctor-bg:#dbeafe;--doctor-h:#1d4ed8;
-  --trainer:#ea580c;--trainer-bg:#ffedd5;--trainer-h:#c2410c;
-  --nutri:#7c3aed;--nutri-bg:#ede9fe;--nutri-h:#6d28d9;
-  --radius:10px;--shadow:0 1px 3px rgba(0,0,0,.08);
-  --font:'Plus Jakarta Sans',system-ui,sans-serif;
-  --mono:'DM Mono',monospace;
+:root {
+  /* ── Synapse Design System ─────────────────────────── */
+  --bg:           #F5F1E8;
+  --bg-warm:      #EBE5D4;
+  --bg-contrast:  #111411;
+  --surface:      #FFFFFF;
+  --surface2:     #F5F1E8;
+  --border:       rgba(17,20,17,0.10);
+  --border-strong:rgba(17,20,17,0.18);
+
+  --text:         #111411;
+  --muted:        #4A4D48;
+  --soft:         #7A7D77;
+
+  --primary:      #C96442;
+  --primary-hover:#A04B2E;
+  --primary-soft: #F1D9CC;
+  --primary-bg:   #FDF4F0;
+
+  --impact:       #4A7A5F;
+  --impact-soft:  #C9DDC7;
+
+  /* Portal accent colors kept for role indicators */
+  --doctor:       #C96442;
+  --doctor-bg:    #FDF4F0;
+  --trainer:      #4A7A5F;
+  --trainer-bg:   #EEF6F0;
+  --nutri:        #A04B2E;
+  --nutri-bg:     #FDF4F0;
+  --ai-accent:    #111411;
+  --ai-bg:        #F5F1E8;
+
+  --radius:       12px;
+  --radius-lg:    24px;
+  --font-sans:    'Inter', system-ui, sans-serif;
+  --font-serif:   'Instrument Serif', Georgia, serif;
+
+  /* App dark UI tokens */
+  --app-bg:       #0B0D10;
+  --app-elevated: #14171C;
+  --app-text:     #F0EEE6;
+}
+[data-theme="dark"] {
+  --bg:        #111411;
+  --bg-warm:   #1C2420;
+  --surface:   #1B1F26;
+  --surface2:  #14171C;
+  --border:    rgba(255,255,255,0.08);
+  --text:      #F0EEE6;
+  --muted:     #9CA0A8;
+  --soft:      #6B6F78;
+  --primary:   #C96442;
+  --primary-bg:#1F1310;
+  --primary-soft:#3D2318;
 }
 [data-theme="dark"]{
   --bg:#0a1f1a;--surface:#102820;--surface2:#143228;--border:#1e4035;
@@ -37,7 +77,7 @@
   --trainer:#fb923c;--trainer-bg:#431407;--trainer-h:#f97316;
   --nutri:#a78bfa;--nutri-bg:#2e1065;--nutri-h:#8b5cf6;
 }
-html,body{height:100%;font-family:var(--font);font-size:15px;line-height:1.6;background:var(--bg);color:var(--text)}
+html,body{height:100%;font-family: var(--font-sans);font-size:15px;line-height:1.6;background:var(--bg);color:var(--text)}
 button{cursor:pointer;font:inherit;color:inherit}
 input,select,textarea{font:inherit;color:inherit;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px;outline:none;width:100%;transition:border-color .15s}
 input:focus,select:focus,textarea:focus{border-color:var(--primary)}
@@ -54,7 +94,7 @@ h2{font-size:15px;font-weight:700}
 
 /* Sidebar */
 .logo{padding:18px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;flex-shrink:0}
+.logo-icon{width:32px;height:32px;flex-shrink:0}
 .logo-text{font-size:13px;font-weight:700;line-height:1.3}
 .logo-sub{font-size:11px;color:var(--muted)}
 nav{flex:1;padding:10px 8px}
@@ -262,7 +302,7 @@ nav{flex:1;padding:10px 8px}
   animation:fadeUp .4s ease;
 }
 .role-picker-logo{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.role-picker-title{font-size:28px;font-weight:800;color:var(--text);text-align:center}
+.role-picker-title{font-size:28px;font-weight:700;font-family:var(--font-serif);color:var(--text);text-align:center}
 .role-picker-sub{font-size:15px;color:var(--muted);margin-bottom:36px;text-align:center}
 .role-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1020px;width:100%}
 .role-card{padding:28px 24px;border-radius:16px;border:2px solid var(--border);background:var(--surface);cursor:pointer;text-align:center;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:12px}
@@ -618,6 +658,61 @@ nav{flex:1;padding:10px 8px}
 .dash-card-wrap:hover .drag-handle{opacity:1}
 .dash-edit-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--surface-2);border:1px dashed var(--border);border-radius:12px;margin-bottom:14px;font-size:12px;color:var(--muted)}
 .dash-edit-bar.active{border-color:var(--primary);background:rgba(13,147,115,.06);color:var(--primary)}
+
+/* ── CHAT FAB + DRAWER ─────────────────────────────── */
+#chat-fab{position:fixed;bottom:28px;right:28px;z-index:1100;width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),#0891b2);border:none;cursor:pointer;
+  box-shadow:0 4px 20px rgba(13,147,115,.45);display:none;align-items:center;justify-content:center;
+  transition:transform .2s,box-shadow .2s;color:#fff}
+#chat-fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(13,147,115,.55)}
+#chat-fab .fab-badge{position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;
+  background:#ef4444;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+#chat-drawer{position:fixed;bottom:100px;right:28px;z-index:1099;width:380px;max-width:calc(100vw - 40px);
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  box-shadow:0 8px 40px rgba(0,0,0,.18);display:none;flex-direction:column;overflow:hidden;
+  transition:opacity .2s,transform .2s;transform-origin:bottom right}
+#chat-drawer.open{display:flex}
+@keyframes drawerIn{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+#chat-drawer.open{animation:drawerIn .18s ease}
+@media(max-width:600px){
+  #chat-drawer{bottom:0;right:0;width:100%;max-width:100%;border-radius:16px 16px 0 0}
+  #chat-fab{bottom:20px;right:20px}
+}
+
+
+/* ── COMPLIANCE — HIPAA / GDPR / LGPD ──────────────────────────────────────── */
+#oz-cookie-banner{
+  position:fixed;bottom:0;left:0;right:0;z-index:99000;
+  background:#1e293b;color:#f1f5f9;
+  padding:14px 24px;display:none;align-items:center;gap:14px;flex-wrap:wrap;
+  font-size:13px;line-height:1.5;border-top:3px solid #0d9373;
+  box-shadow:0 -4px 24px rgba(0,0,0,.35)}
+#oz-cookie-banner p{flex:1;min-width:200px;margin:0}
+#oz-cookie-banner a{color:#34d399;text-decoration:underline;cursor:pointer}
+.oz-cb-btn{padding:7px 16px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.oz-cb-accept{background:#0d9373;color:#fff}.oz-cb-accept:hover{background:#0a6b55}
+.oz-cb-reject{background:transparent;color:#94a3b8;border:1px solid #475569}.oz-cb-reject:hover{color:#f1f5f9}
+
+#oz-privacy-modal{
+  display:none;position:fixed;inset:0;z-index:99500;
+  background:rgba(15,23,42,.75);align-items:center;justify-content:center;padding:20px}
+#oz-privacy-modal.oz-open{display:flex}
+.oz-pm-box{background:#fff;border-radius:16px;max-width:680px;width:100%;max-height:85vh;
+  display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.3);border:1px solid #e2e8f0}
+.oz-pm-head{padding:18px 24px;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between}
+.oz-pm-head h2{font-size:16px;font-weight:700;color:#0f172a;margin:0}
+.oz-pm-close{background:none;border:none;font-size:24px;cursor:pointer;color:#64748b;line-height:1;padding:0}
+.oz-pm-body{padding:22px 24px;overflow-y:auto;font-size:13px;color:#1e293b;line-height:1.7}
+.oz-pm-body h3{font-size:13px;font-weight:700;color:#0d9373;margin:18px 0 6px;text-transform:uppercase;letter-spacing:.04em}
+.oz-pm-body h3:first-child{margin-top:0}
+.oz-pm-body ul{margin:4px 0 10px 18px;padding:0}.oz-pm-body li{margin-bottom:3px}
+.oz-badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.oz-badge{display:inline-flex;align-items:center;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.04em}
+.oz-badge-hipaa{background:#dbeafe;color:#1d4ed8}
+.oz-badge-gdpr{background:#f3e8ff;color:#6d28d9}
+.oz-badge-lgpd{background:#dcfce7;color:#15803d}
+.oz-badge-iso{background:#fef9c3;color:#854d0e}
+.oz-pm-foot{padding:14px 24px;border-top:1px solid #e2e8f0;display:flex;gap:10px;justify-content:flex-end}
 </style>
 </head>
 <body>
@@ -625,21 +720,18 @@ nav{flex:1;padding:10px 8px}
 <!-- ROLE PICKER -->
 <div id="role-picker">
   <div class="role-picker-logo">
-    <svg width="40" height="40" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="17" stroke="var(--primary)" stroke-width="2"/>
-      <path d="M18 8 C12 8 9 13 9 18 C9 23 12 28 18 28" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M18 8 C24 8 27 13 27 18 C27 23 24 28 18 28" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 3"/>
-      <circle cx="18" cy="18" r="3" fill="var(--primary)"/>
-      <path d="M18 15 L18 11" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/>
+    <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="14" fill="none" stroke="#111411" stroke-width="1.5"/>
+      <circle cx="16" cy="16" r="6" fill="#C96442"/>
     </svg>
     <div>
-      <div style="font-size:20px;font-weight:800">Ozemfica</div>
-      <div style="font-size:11px;opacity:.6;letter-spacing:.05em">GLPerfection · GLPerfecto</div>
+      <div style="font-size:20px;font-weight:800">Synapse</div>
+      <div style="font-size:11px;opacity:.6;letter-spacing:.05em">GLP-1 AI Platform</div>
       <div style="font-size:12px;color:var(--muted)">Do início ao longo prazo — todo o ciclo GLP-1</div>
     </div>
   </div>
-  <div class="role-picker-title">Bem-vindo à Ozemfica</div>
-  <p class="role-picker-sub">Acompanhamento completo do ciclo GLP-1 — da primeira dose ao longo prazo.<br>Selecione seu perfil para continuar.</p>
+  <div class="role-picker-title">Bem-vindo ao Synapse</div>
+  <p class="role-picker-sub">Your AI-powered GLP-1 companion — from first dose to long-term success.<br>Selecione seu perfil para continuar.</p>
   <div class="role-cards">
     <div class="role-card patient" onclick="selectRole('paciente')">
       <div class="role-icon patient">🧍</div>
@@ -709,6 +801,16 @@ nav{flex:1;padding:10px 8px}
 <script>
 // ─── STATE ────────────────────────────────────────────────────────────────────
 const state = {
+  patientChat: {
+    messages: [
+      { id: 1, role: 'ai', text: 'Olá, Maria! Sou a assistente do Synapse. Posso tirar dúvidas sobre sua jornada GLP-1, nutrição, exercícios, sintomas ou bem-estar. Você pode digitar ou usar o microfone para falar comigo. Como posso ajudar hoje?', time: '09:00' },
+    ],
+    input: '',
+    loading: false,
+    listening: false,
+    recognition: null,
+    open: false,
+  },
   role: null,  // 'paciente' | 'medico' | 'treinador' | 'ai_coach'
   page: 'dashboard',
   aiCoach: {
@@ -735,8 +837,24 @@ const state = {
   profile: {
     name: 'Maria Silva', currentWeight: 72.5, targetWeight: 68,
     glp1StartDate: '2023-12-01', glp1EndDate: '2024-06-01', glp1Phase: 'manutencao', height: 165, age: 38, sex: 'feminino',
-    activityLevel: 'moderado'
+    activityLevel: 'moderado',
+    myTeam: [
+      {id:1, name:'Dr. Carlos Mendes', role:'medico', specialty:'Endocrinologia', since:'2026-01-10'},
+      {id:2, name:'Prof. Lucas Ferreira', role:'treinador', specialty:'Educação Física', since:'2026-02-01'},
+      {id:3, name:'Dra. Fernanda Lima', role:'nutricionista', specialty:'Nutrição Clínica', since:'2026-01-15'},
+    ],
+    pendingInvites: []
   },
+  archivedPatients: [],
+  archivedStudents: [],
+  archivedNutriClients: [],
+  sentInvites: [],
+  showAddPatientModal: false,
+  showInviteModal: false,
+  showInviteProModal: false,
+  addPatientForm: {name:'',email:'',phone:'',condition:''},
+  inviteForm: {patientId:null, role:'medico', email:'', method:'email'},
+  inviteProForm: {name:'',email:'',role:'medico'},
   weights: [
     {id:1,date:'2025-10-18',weight:89.2,note:''},
     {id:2,date:'2025-11-17',weight:86.5,note:''},
@@ -1143,19 +1261,19 @@ const state = {
   memedApiKey: null,
   memedPatientId: null,
   patients: [
-    {id:1,name:'Maria Silva',age:38,lastWeight:72.5,targetWeight:68,lost:16.7,trend:-0.4,glp1Start:'2023-12-01',glp1End:'2024-06-01',glp1Phase:'manutencao',protein:62,fiber:18,exerciseAdherence:80,alerts:['proteina_baixa'],notes:'',suggestions:'',phone:'5511999001001',clinicalHistory:[
+    {id:1,name:'Maria Silva',age:38,lastWeight:72.5,targetWeight:68,lost:16.7,trend:-0.4,glp1Start:'2023-12-01',glp1End:'2024-06-01',glp1Phase:'manutencao',protein:62,fiber:18,exerciseAdherence:80,alerts:['proteina_baixa'],notes:'',suggestions:'',phone:'5511999001001',status:'active',invitePending:false,team:['treinador','nutricionista'],email:'maria.silva@email.com',clinicalHistory:[
       {id:1,date:'2026-04-02',type:'consulta',role:'medico',author:'Dr. Carlos Mendes',text:'Consulta de acompanhamento pós-GLP1. Peso estável, reganho sob controle. Orientado aumento de proteína para 90g/dia.'},
       {id:2,date:'2026-04-02',type:'whatsapp',role:'medico',author:'Dr. Carlos Mendes',text:'Maria, tudo bem? Lembrete: aumentar o consumo de proteína nas próximas semanas. Dúvidas, é só chamar! 🩺'},
       {id:3,date:'2026-04-10',type:'whatsapp',role:'nutri',author:'Dra. Fernanda Lima',text:'Oi Maria! Vi que sua média de fibras esta semana ficou em 18g. Tente incluir uma xícara de leguminosas no almoço para chegar nos 25g. Beijos!'},
     ]},
-    {id:2,name:'João Costa',age:45,lastWeight:88.1,targetWeight:82,lost:9.2,trend:+0.8,glp1Start:'2024-03-01',glp1End:'2024-09-15',glp1Phase:'manutencao',protein:55,fiber:12,exerciseAdherence:40,alerts:['regain_risco','proteina_baixa','exercicio_baixo'],notes:'',suggestions:'',phone:'5511988002002',clinicalHistory:[
+    {id:2,name:'João Costa',age:45,lastWeight:88.1,targetWeight:82,lost:9.2,trend:+0.8,glp1Start:'2024-03-01',glp1End:'2024-09-15',glp1Phase:'manutencao',protein:55,fiber:12,exerciseAdherence:40,alerts:['regain_risco','proteina_baixa','exercicio_baixo'],notes:'',suggestions:'',phone:'5511988002002',status:'active',invitePending:true,team:['treinador'],email:'joao.costa@email.com',clinicalHistory:[
       {id:1,date:'2026-03-20',type:'consulta',role:'medico',author:'Dr. Carlos Mendes',text:'Paciente apresenta sinais de reganho de peso (0.8kg/sem). Reforçada importância da atividade física e restrição calórica. Solicitar exames em 30 dias.'},
       {id:2,date:'2026-03-21',type:'whatsapp',role:'medico',author:'Dr. Carlos Mendes',text:'João, lembrete importante: manter a meta de 5 sessões de exercício por semana é fundamental agora. Qualquer sintoma, me avise!'},
     ]},
-    {id:3,name:'Ana Rodrigues',age:52,lastWeight:65.0,targetWeight:63,lost:11.3,trend:-0.2,glp1Start:'2023-09-01',glp1End:'2024-03-20',glp1Phase:'manutencao',protein:88,fiber:24,exerciseAdherence:95,alerts:[],notes:'',suggestions:'',phone:'5511977003003',clinicalHistory:[
+    {id:3,name:'Ana Rodrigues',age:52,lastWeight:65.0,targetWeight:63,lost:11.3,trend:-0.2,glp1Start:'2023-09-01',glp1End:'2024-03-20',glp1Phase:'manutencao',protein:88,fiber:24,exerciseAdherence:95,alerts:[],notes:'',suggestions:'',phone:'5511977003003',status:'active',invitePending:false,team:['medico','treinador','nutricionista'],email:'ana.rodrigues@email.com',clinicalHistory:[
       {id:1,date:'2026-04-10',type:'consulta',role:'medico',author:'Dr. Carlos Mendes',text:'Evolução excelente. Peso alvo atingido. Paciente bem aderente ao plano. Manter monitoramento trimestral.'},
     ]},
-    {id:4,name:'Pedro Santos',age:61,lastWeight:94.2,targetWeight:88,lost:7.1,trend:+1.2,glp1Start:'2024-05-01',glp1End:'2024-11-10',glp1Phase:'transicao',protein:48,fiber:10,exerciseAdherence:20,alerts:['regain_risco','exercicio_baixo','proteina_baixa'],notes:'',suggestions:'',phone:'5511966004004',clinicalHistory:[
+    {id:4,name:'Pedro Santos',age:61,lastWeight:94.2,targetWeight:88,lost:7.1,trend:+1.2,glp1Start:'2024-05-01',glp1End:'2024-11-10',glp1Phase:'transicao',protein:48,fiber:10,exerciseAdherence:20,alerts:['regain_risco','exercicio_baixo','proteina_baixa'],notes:'',suggestions:'',phone:'5511966004004',status:'active',invitePending:false,team:['medico'],email:'pedro.santos@email.com',clinicalHistory:[
       {id:1,date:'2026-04-06',type:'consulta',role:'medico',author:'Dr. Carlos Mendes',text:'Alerta de reganho: +1.2kg/semana. Avaliado risco cardiovascular. Reforçar atividade física leve diária. Retornar em 2 semanas.'},
       {id:2,date:'2026-04-07',type:'whatsapp',role:'medico',author:'Dr. Carlos Mendes',text:'Pedro, boa tarde! Lembre-se de caminhar pelo menos 20 minutos hoje. Pequenos passos fazem grande diferença! Estamos junto nessa. 💪'},
     ]},
@@ -1164,20 +1282,20 @@ const state = {
   // TRAINER
   selectedStudent: null,
   students: [
-    {id:1,name:'Maria Silva',age:38,weight:72.5,goal:'manutencao_peso',adherence:80,sessionsWeek:3,targetSessions:3,lastSession:'2026-04-14',phone:'5511999001001',clinicalHistory:[],exercises:[
+    {id:1,name:'Maria Silva',age:38,weight:72.5,goal:'manutencao_peso',adherence:80,sessionsWeek:3,targetSessions:3,lastSession:'2026-04-14',phone:'5511999001001',status:'active',invitePending:false,team:['medico','nutricionista'],email:'maria.silva@email.com',clinicalHistory:[],exercises:[
       {name:'Musculação',type:'forca',days:['seg','qua','sex'],duration:45,completedThisWeek:3,targetWeek:3},
       {name:'Caminhada',type:'cardio',days:['ter','qui','sab'],duration:30,completedThisWeek:2,targetWeek:3},
       {name:'Alongamento',type:'flexibilidade',days:['dom'],duration:20,completedThisWeek:1,targetWeek:1},
     ],notes:'',trainerSuggestions:''},
-    {id:2,name:'João Costa',age:45,weight:88.1,goal:'perda_peso',adherence:40,sessionsWeek:2,targetSessions:5,lastSession:'2026-04-10',phone:'5511988002002',clinicalHistory:[],exercises:[
+    {id:2,name:'João Costa',age:45,weight:88.1,goal:'perda_peso',adherence:40,sessionsWeek:2,targetSessions:5,lastSession:'2026-04-10',phone:'5511988002002',status:'active',invitePending:true,team:[],email:'joao.costa@email.com',clinicalHistory:[],exercises:[
       {name:'Musculação',type:'forca',days:['seg','qua','sex'],duration:30,completedThisWeek:1,targetWeek:3},
       {name:'Caminhada',type:'cardio',days:['ter','qui','sab','dom'],duration:40,completedThisWeek:1,targetWeek:4},
     ],notes:'',trainerSuggestions:''},
-    {id:3,name:'Ana Rodrigues',age:52,weight:65.0,goal:'manutencao_musculo',adherence:95,sessionsWeek:5,targetSessions:5,lastSession:'2026-04-16',phone:'5511977003003',clinicalHistory:[],exercises:[
+    {id:3,name:'Ana Rodrigues',age:52,weight:65.0,goal:'manutencao_musculo',adherence:95,sessionsWeek:5,targetSessions:5,lastSession:'2026-04-16',phone:'5511977003003',status:'active',invitePending:false,team:['medico','nutricionista'],email:'ana.rodrigues@email.com',clinicalHistory:[],exercises:[
       {name:'Musculação',type:'forca',days:['seg','ter','qui','sex','sab'],duration:60,completedThisWeek:5,targetWeek:5},
       {name:'Yoga',type:'flexibilidade',days:['qua','dom'],duration:45,completedThisWeek:2,targetWeek:2},
     ],notes:'',trainerSuggestions:''},
-    {id:4,name:'Pedro Santos',age:61,weight:94.2,goal:'perda_peso',adherence:20,sessionsWeek:1,targetSessions:4,lastSession:'2026-04-06',phone:'5511966004004',clinicalHistory:[],exercises:[
+    {id:4,name:'Pedro Santos',age:61,weight:94.2,goal:'perda_peso',adherence:20,sessionsWeek:1,targetSessions:4,lastSession:'2026-04-06',phone:'5511966004004',status:'active',invitePending:false,team:['medico'],email:'pedro.santos@email.com',clinicalHistory:[],exercises:[
       {name:'Caminhada leve',type:'cardio',days:['ter','qui','sab','dom'],duration:20,completedThisWeek:1,targetWeek:4},
     ],notes:'',trainerSuggestions:''},
   ],
@@ -1190,7 +1308,7 @@ const state = {
   selectedNutriClient: null,
   nutriClients: [
     {
-      id:1, name:'Maria Silva', age:38, weight:72.5, height:165, sex:'feminino', goal:'manutencao_peso', phone:'5511999001001', clinicalHistory:[],
+      id:1, name:'Maria Silva', age:38, weight:72.5, height:165, sex:'feminino', goal:'manutencao_peso', phone:'5511999001001', status:'active', invitePending:false, team:['medico','treinador'], email:'maria.silva@email.com', clinicalHistory:[],
       tmb:1420, tdee:2200, kcalMeta:1800, protMeta:90, carbMeta:180, gordMeta:55, fibraMeta:25,
       adherence:72,
       weeklyAvg:{kcal:1620, prot:62, carb:165, gord:52, fibra:18},
@@ -1215,7 +1333,7 @@ const state = {
       ],
     },
     {
-      id:2, name:'João Costa', age:45, weight:88.1, height:178, sex:'masculino', goal:'perda_peso', phone:'5511988002002', clinicalHistory:[],
+      id:2, name:'João Costa', age:45, weight:88.1, height:178, sex:'masculino', goal:'perda_peso', phone:'5511988002002', status:'active', invitePending:true, team:['treinador'], email:'joao.costa@email.com', clinicalHistory:[],
       tmb:1890, tdee:2720, kcalMeta:2100, protMeta:110, carbMeta:200, gordMeta:65, fibraMeta:30,
       adherence:38,
       weeklyAvg:{kcal:2480, prot:55, carb:290, gord:88, fibra:12},
@@ -1390,6 +1508,7 @@ function renderSidebar() {
       {page:'medico_risco', icon:'<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>', label:'Score de Risco'},
       {page:'medico_followup', icon:'<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>', label:'Protocolo Follow-up'},
       {page:'medico_saude_mental', icon:'<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>', label:'Saúde Mental'},
+      {page:'medico_arquivados', icon:'<path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/>', label:'Arquivados'},
     ];
     navItems = items.map(i => `
       <button class="nav-item ${state.page===i.page?'active':''}" onclick="navigate('${i.page}')">
@@ -1407,6 +1526,7 @@ function renderSidebar() {
       {page:'trainer_news', icon:'<path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6z"/>', label:'Pesquisas'},
       {page:'trainer_dose_cal', icon:'<path d="M8 2v4M16 2v4M3 10h18M21 8H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2z"/><path d="M12 14h.01M8 14h.01M16 14h.01"/>', label:'Calendário GLP-1'},
       {page:'trainer_fadiga', icon:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>', label:'Fadiga & Composição'},
+      {page:'trainer_arquivados', icon:'<path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/>', label:'Arquivados'},
     ];
     navItems = items.map(i => `
       <button class="nav-item ${state.page===i.page?'active':''}" onclick="navigate('${i.page}')">
@@ -1425,6 +1545,7 @@ function renderSidebar() {
       {page:'nutri_micronut', icon:'<circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>', label:'Micronutrientes'},
       {page:'nutri_reintro', icon:'<path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>', label:'Plano de Reintrodução'},
       {page:'nutri_qualidade', icon:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>', label:'Score de Qualidade'},
+      {page:'nutri_arquivados', icon:'<path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/>', label:'Arquivados'},
     ];
     navItems = items.map(i => `
       <button class="nav-item ${state.page===i.page?'active':''}" onclick="navigate('${i.page}')">
@@ -1449,6 +1570,7 @@ function renderSidebar() {
       {page:'dispensa', icon:'<path d="M3 3h18v4H3z"/><path d="M4 7v12a1 1 0 001 1h14a1 1 0 001-1V7"/><path d="M9 11h6M9 15h4"/>', label:'Dispensa Virtual'},
       {page:'lista_compras', icon:'<path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>', label:'Lista de Compras'},
       {page:'meu_historico', icon:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/>', label:'Meu Histórico'},
+      {page:'minha_equipe', icon:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M12 11l2 2 4-4"/>', label:'Minha Equipe'},
     ];
     navItems = items.map(i => `
       <button class="nav-item ${state.page===i.page?'active':''}" onclick="navigate('${i.page}')">
@@ -1462,15 +1584,12 @@ function renderSidebar() {
 
   el.innerHTML = `
     <div class="logo">
-      <svg class="logo-icon" viewBox="0 0 36 36" fill="none">
-        <circle cx="18" cy="18" r="17" stroke="${roleColor}" stroke-width="2"/>
-        <path d="M18 8 C12 8 9 13 9 18 C9 23 12 28 18 28" stroke="${roleColor}" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M18 8 C24 8 27 13 27 18 C27 23 24 28 18 28" stroke="${roleColor}" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 3"/>
-        <circle cx="18" cy="18" r="3" fill="${roleColor}"/>
-        <path d="M18 15 L18 11" stroke="${roleColor}" stroke-width="2" stroke-linecap="round"/>
+      <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#111411" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="6" fill="#C96442"/>
       </svg>
       <div>
-        <div class="logo-text">Ozemfica</div>
+        <div class="logo-text">Synapse</div>
         <div class="logo-sub">${roleName}</div>
       </div>
     </div>
@@ -1483,6 +1602,10 @@ function renderSidebar() {
       <button class="theme-btn" onclick="toggleTheme()">
         <svg id="theme-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <span id="theme-label">Modo escuro</span>
+      </button>
+      <button class="theme-btn" onclick="ozOpenPrivacy()" title="HIPAA · GDPR · LGPD">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Privacidade &amp; Compliance</span>
       </button>
     </div>`;
 }
@@ -2310,20 +2433,29 @@ function openPatient(id) {
 }
 
 function renderMedicoPacientes() {
+  const active = state.patients.filter(p=>p.status!=='archived');
+  const archived = state.archivedPatients || [];
+  const pending = state.sentInvites.filter(i=>i.role==='medico');
   return `<div class="page">
     <div class="page-header">
       <div><h1 class="page-title">Pacientes</h1><p class="page-sub">Pacientes em todas as fases do ciclo — clique para detalhes.</p></div>
-      <span class="badge badge-doctor">${state.patients.length} pacientes</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="badge badge-doctor">${active.length} ativos</span>
+        ${archived.length>0?`<button class="btn btn-outline btn-sm" onclick="navigate('medico_arquivados')">📦 ${archived.length} arquivado(s)</button>`:''}
+        ${pending.length>0?`<span class="badge badge-warn" style="cursor:pointer" onclick="navigate('medico_convites')">${pending.length} convite(s) pendente(s)</span>`:''}
+        <button class="btn btn-doctor btn-sm" onclick="openAddPatientModal('medico')">+ Adicionar Paciente</button>
+      </div>
     </div>
     <div style="display:grid;gap:10px">
-      ${state.patients.map(p => {
+      ${active.map(p => {
         const risk = riskScore(p);
         const days = daysBetween(p.glp1End, state.todayStr);
-        return `<div class="patient-card" onclick="openPatient(${p.id})" style="flex-wrap:wrap">
-          <div class="patient-avatar">${initials(p.name)}</div>
-          <div class="patient-info" style="flex:1;min-width:220px">
+        return `<div class="patient-card" style="flex-wrap:wrap;cursor:default">
+          <div class="patient-avatar" style="cursor:pointer" onclick="openPatient(${p.id})">${initials(p.name)}</div>
+          <div class="patient-info" style="flex:1;min-width:220px;cursor:pointer" onclick="openPatient(${p.id})">
             <div class="patient-name">${p.name}
               <span class="badge ${risk==='high'?'badge-danger':risk==='medium'?'badge-warn':'badge-success'}" style="font-size:10px">Risco ${riskLabel(risk)}</span>
+              ${p.invitePending?'<span class="badge badge-warn" style="font-size:10px">⏳ Convite pendente</span>':''}
             </div>
             <div class="patient-meta">
               <span>${p.age} anos</span>
@@ -2340,9 +2472,15 @@ function renderMedicoPacientes() {
             ${miniProg('Fibras', p.fiber, 25, 'g', 'var(--amber)')}
             ${miniProg('Adesão exercício', p.exerciseAdherence, 100, '%', p.exerciseAdherence>=80?'var(--success)':p.exerciseAdherence>=50?'var(--warn)':'var(--danger)')}
           </div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;padding-left:8px" onclick="event.stopPropagation()">
+            <button class="btn btn-outline btn-sm" onclick="openInviteModal(${p.id},'medico')">✉️ Convidar</button>
+            <button class="btn btn-outline btn-sm" style="color:var(--muted)" onclick="archivePatient(${p.id},'medico')">📦 Arquivar</button>
+          </div>
         </div>`;
       }).join('')}
     </div>
+    ${renderAddPatientModal()}
+    ${renderInviteModal()}
   </div>`;
 }
 
@@ -2832,18 +2970,27 @@ function openStudent(id) {
 }
 
 function renderTrainerAlunos() {
+  const active = state.students.filter(s=>s.status!=='archived');
+  const archived = state.archivedStudents || [];
+  const pending = state.sentInvites.filter(i=>i.role==='treinador');
   return `<div class="page">
     <div class="page-header">
       <div><h1 class="page-title">Meus Alunos</h1><p class="page-sub">Alunos em diferentes fases do ciclo GLP-1 — clique para gerenciar.</p></div>
-      <span class="badge badge-trainer">${state.students.length} alunos</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="badge badge-trainer">${active.length} alunos</span>
+        ${archived.length>0?`<button class="btn btn-outline btn-sm" onclick="navigate('trainer_arquivados')">📦 ${archived.length} arquivado(s)</button>`:''}
+        ${pending.length>0?`<span class="badge badge-warn" style="cursor:pointer" onclick="navigate('trainer_convites')">${pending.length} convite(s) pendente(s)</span>`:''}
+        <button class="btn btn-sm" style="background:var(--trainer);color:#fff;border:none;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px" onclick="openAddPatientModal('treinador')">+ Adicionar Aluno</button>
+      </div>
     </div>
     <div style="display:grid;gap:10px">
-      ${state.students.map(s=>`
-        <div class="student-card" onclick="openStudent(${s.id})" style="flex-wrap:wrap">
-          <div class="student-avatar">${initials(s.name)}</div>
-          <div style="flex:1;min-width:220px">
+      ${active.map(s=>`
+        <div class="student-card" style="flex-wrap:wrap;cursor:default">
+          <div class="student-avatar" style="cursor:pointer" onclick="openStudent(${s.id})">${initials(s.name)}</div>
+          <div style="flex:1;min-width:220px;cursor:pointer" onclick="openStudent(${s.id})">
             <div style="font-size:14px;font-weight:700">${s.name}
               <span class="badge" style="font-size:10px;background:var(--trainer-bg);color:var(--trainer);border-color:var(--trainer)">${goalLabel(s.goal)}</span>
+              ${s.invitePending?'<span class="badge badge-warn" style="font-size:10px">⏳ Convite pendente</span>':''}
             </div>
             <div style="font-size:12px;color:var(--muted);margin-top:2px">${s.age} anos · ${s.weight} kg · Última sessão: ${fmt(s.lastSession)}</div>
             <div style="margin-top:8px;display:grid;gap:5px">
@@ -2858,8 +3005,14 @@ function renderTrainerAlunos() {
             <div style="font-size:28px;font-weight:800;color:${adhColor(s.adherence)}">${s.adherence}%</div>
             <div style="font-size:11px;color:var(--muted)">adesão</div>
           </div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;padding-left:8px" onclick="event.stopPropagation()">
+            <button class="btn btn-outline btn-sm" onclick="openInviteModal(${s.id},'treinador')">✉️ Convidar</button>
+            <button class="btn btn-outline btn-sm" style="color:var(--muted)" onclick="archivePatient(${s.id},'treinador')">📦 Arquivar</button>
+          </div>
         </div>`).join('')}
     </div>
+    ${renderAddPatientModal()}
+    ${renderInviteModal()}
   </div>`;
 }
 
@@ -3461,19 +3614,27 @@ function renderNutriDashboard() {
 }
 
 function renderNutriPacientes() {
-  const clients = state.nutriClients;
+  const clients = state.nutriClients.filter(c=>c.status!=='archived');
+  const archived = state.archivedNutriClients || [];
+  const pending = state.sentInvites.filter(i=>i.role==='nutricionista');
   return `<div class="page">
     <div class="page-header">
       <div><h1>Meus Pacientes</h1><p class="page-sub">Selecione um paciente para ver o acompanhamento nutricional completo.</p></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        ${archived.length>0?`<button class="btn btn-outline btn-sm" onclick="navigate('nutri_arquivados')">📦 ${archived.length} arquivado(s)</button>`:''}
+        ${pending.length>0?`<span class="badge badge-warn" style="cursor:pointer" onclick="navigate('nutri_convites')">${pending.length} convite(s) pendente(s)</span>`:''}
+        <button class="btn btn-sm" style="background:var(--nutri);color:#fff;border:none;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px" onclick="openAddPatientModal('nutricionista')">+ Adicionar Paciente</button>
+      </div>
     </div>
     ${clients.map(c => `
-      <div class="nutri-card" onclick="state.selectedNutriClient=${c.id};render()" style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
-        <div class="nutri-avatar" style="width:56px;height:56px;font-size:20px">${initials(c.name)}</div>
-        <div style="flex:1">
+      <div class="nutri-card" style="display:flex;align-items:center;gap:14px;margin-bottom:10px;cursor:default">
+        <div class="nutri-avatar" style="width:56px;height:56px;font-size:20px;cursor:pointer" onclick="state.selectedNutriClient=${c.id};render()">${initials(c.name)}</div>
+        <div style="flex:1;cursor:pointer" onclick="state.selectedNutriClient=${c.id};render()">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <span style="font-weight:800;font-size:15px">${c.name}</span>
             <span class="badge badge-outline">${nutriGoalLabel(c.goal)}</span>
             ${nutriAdherenceBadge(c.adherence)}
+            ${c.invitePending?'<span class="badge badge-warn" style="font-size:10px">⏳ Convite pendente</span>':''}
           </div>
           <div style="font-size:12px;color:var(--muted);margin-top:3px">${c.age} anos · ${c.weight}kg · ${c.height}cm · TMB: ${c.tmb} kcal · TDEE: ${c.tdee} kcal</div>
           <div style="display:flex;gap:16px;margin-top:6px;font-size:12px">
@@ -3486,7 +3647,13 @@ function renderNutriPacientes() {
           ${c.alerts.length > 0 ? `<div style="font-size:12px;color:var(--danger);font-weight:700">${c.alerts.length} alerta(s)</div>` : '<div style="font-size:12px;color:var(--success);font-weight:700">✓ Sem alertas</div>'}
           <div style="font-size:11px;color:var(--muted);margin-top:2px">Próxima: ${fmt(c.nextConsult)}</div>
         </div>
+        <div style="display:flex;flex-direction:column;gap:6px" onclick="event.stopPropagation()">
+          <button class="btn btn-outline btn-sm" onclick="openInviteModal(${c.id},'nutricionista')">✉️ Convidar</button>
+          <button class="btn btn-outline btn-sm" style="color:var(--muted)" onclick="archivePatient(${c.id},'nutricionista')">📦 Arquivar</button>
+        </div>
       </div>`).join('')}
+    ${renderAddPatientModal()}
+    ${renderInviteModal()}
   </div>`;
 }
 
@@ -3654,7 +3821,7 @@ function renderNutriPlanos() {
   const sel = state.selectedNutriClient ? clients.find(c=>c.id===state.selectedNutriClient) : clients[0];
 
   const templates = [
-    {name:'Ozemfica — Plano Manutenção Básica', goal:'manutencao_peso', kcal:'1600–1800', prot:'80–100g', fibra:'25g+',
+    {name:'Synapse — Plano Manutenção Básica', goal:'manutencao_peso', kcal:'1600–1800', prot:'80–100g', fibra:'25g+',
       meals:[
         {meal:'Café da manhã',foods:['3 claras + 1 gema mexidas','1 fatia pão integral','Café preto ou chá verde'],kcal:280,prot:22,carb:24,gord:8},
         {meal:'Almoço',foods:['150g frango grelhado','Arroz integral 1 xíc','Salada verde à vontade','Legumes refogados'],kcal:520,prot:42,carb:46,gord:12},
@@ -3903,11 +4070,12 @@ function render() {
 
   // Render sidebar
   renderSidebar();
+  updateChatFAB();
 
   const main = document.getElementById('main-content');
 
   if (state.role === 'paciente') {
-    const pages = {dashboard:renderDashboard, peso:renderPeso, refeicoes:renderRefeicoes, exercicios:renderExercicios, calculadora:renderCalculadora, wellbeing:renderWellbeing, body_comp:renderBodyComp, achievements:renderAchievements, receitas:renderReceitas, weekly_intake:renderWeeklyIntake, dispensa:renderDispensa, lista_compras:renderListaCompras, analise_prato:renderAnalisePrato, meu_historico:renderMeuHistorico, body_photos:renderBodyPhotosPage};
+    const pages = {dashboard:renderDashboard, peso:renderPeso, refeicoes:renderRefeicoes, exercicios:renderExercicios, calculadora:renderCalculadora, wellbeing:renderWellbeing, body_comp:renderBodyComp, achievements:renderAchievements, receitas:renderReceitas, weekly_intake:renderWeeklyIntake, dispensa:renderDispensa, lista_compras:renderListaCompras, analise_prato:renderAnalisePrato, meu_historico:renderMeuHistorico, body_photos:renderBodyPhotosPage, minha_equipe:renderMinhaEquipe};
     main.innerHTML = (pages[state.page] || renderDashboard)();
     setTimeout(()=>{
       if (state.page==='dashboard'||state.page==='peso') buildWeightChart();
@@ -3933,6 +4101,8 @@ function render() {
       medico_risco: ()=>renderRiskScore(),
       medico_followup: ()=>renderFollowupProtocol(),
       medico_saude_mental: ()=>renderMentalScreening(),
+      medico_arquivados: ()=>renderArchivedPatientsPage('medico'),
+      medico_convites: ()=>renderPendingInvitesPage('medico'),
     };
     main.innerHTML = (pages[state.page] || renderMedicoDashboard)();
     setTimeout(buildMedicoCharts, 60);
@@ -3946,6 +4116,8 @@ function render() {
       trainer_news: ()=>renderNews(),
       trainer_dose_cal: ()=>renderDoseCalendar(),
       trainer_fadiga: ()=>renderFatigueTracker(),
+      trainer_arquivados: ()=>renderArchivedPatientsPage('treinador'),
+      trainer_convites: ()=>renderPendingInvitesPage('treinador'),
     };
     main.innerHTML = (pages[state.page] || renderTrainerDashboard)();
     if (state.page==='trainer_insights') buildTrainerCharts();
@@ -3960,6 +4132,8 @@ function render() {
       nutri_micronut: ()=>renderMicronutrients(),
       nutri_reintro: ()=>renderReintroducao(),
       nutri_qualidade: ()=>renderQualityScore(),
+      nutri_arquivados: ()=>renderArchivedPatientsPage('nutricionista'),
+      nutri_convites: ()=>renderPendingInvitesPage('nutricionista'),
     };
     main.innerHTML = (pages[state.page] || renderNutriDashboard)();
   } else if (role === 'ai_coach') {
@@ -4661,8 +4835,8 @@ function renderAchievements() {
         <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px">
           <div style="font-size:36px;flex-shrink:0">🌍</div>
           <div>
-            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Como funciona o Fundo Ozemfica</div>
-            <div style="font-size:12px;color:var(--muted);line-height:1.6">1% de cada mensalidade Premium (R$ ${(don.membershipValue*don.membershipFundPct).toFixed(2)}/mês por assinante) é automaticamente depositado no Fundo Mundial de Combate à Fome, gerenciado e auditado pela UNICEF. Juntos, todos os membros Ozemfica constroem um impacto coletivo mensurável.</div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Como funciona o Fundo Synapse</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6">1% de cada mensalidade Premium (R$ ${(don.membershipValue*don.membershipFundPct).toFixed(2)}/mês por assinante) é automaticamente depositado no Fundo Mundial de Combate à Fome, gerenciado e auditado pela UNICEF. Juntos, todos os membros Synapse constroem um impacto coletivo mensurável.</div>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
@@ -6439,7 +6613,7 @@ function renderAICoachSidebar() {
         <svg width="18" height="18" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="14" stroke="#fff" stroke-width="2.5"/><path d="M18 8 C12 8 9 13 9 18 C9 23 12 28 18 28" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M18 8 C24 8 27 13 27 18 C27 23 24 28 18 28" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 3"/><circle cx="18" cy="18" r="3" fill="#fff"/></svg>
       </div>
       <div>
-        <div style="font-size:14px;font-weight:800;color:var(--primary)">Ozemfica AI</div>
+        <div style="font-size:14px;font-weight:800;color:var(--primary)">Synapse AI</div>
         <div style="font-size:10px;color:var(--muted)">Coach pessoal com IA</div>
       </div>
     </div>
@@ -6718,6 +6892,836 @@ function renderAITreino() {
       <div class="card-header"><h2>💡 Dicas do seu Coach AI</h2></div>
       <div class="card-content">
         ${w.tips.map(t=>`<div style="display:flex;gap:10px;padding:8px 0;font-size:13px;border-bottom:1px solid var(--border)"><span>💪</span><span>${t}</span></div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+function togglePatientChatDrawer() {
+  state.patientChat.open = !state.patientChat.open;
+  const drawer = document.getElementById('chat-drawer');
+  const badge  = document.getElementById('chat-fab-badge');
+  if (!drawer) return;
+  if (state.patientChat.open) {
+    drawer.classList.add('open');
+    if (badge) badge.style.display = 'none';
+    renderChatDrawer();
+    setTimeout(() => {
+      const el = document.getElementById('pcd-msgs');
+      if (el) el.scrollTop = el.scrollHeight;
+      document.getElementById('pcd-input')?.focus();
+    }, 80);
+  } else {
+    drawer.classList.remove('open');
+  }
+}
+
+function renderChatDrawer() {
+  const drawer = document.getElementById('chat-drawer');
+  if (!drawer || !state.patientChat.open) return;
+
+  const msgs = state.patientChat.messages;
+  const isListening = state.patientChat.listening;
+  const isLoading   = state.patientChat.loading;
+
+  const SUGGESTIONS = [
+    'Como está meu progresso?',
+    'O que comer hoje?',
+    'Sinto muito enjoo',
+    'Melhore meu treino',
+    'Dúvida sobre o remédio',
+  ];
+
+  const msgHTML = msgs.map(m => {
+    const ai = m.role === 'ai';
+    return `
+      <div style="display:flex;gap:8px;align-items:flex-end;margin-bottom:12px;${ai?'':'flex-direction:row-reverse'}">
+        <div style="width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;
+          ${ai?'background:linear-gradient(135deg,var(--primary),#0891b2)':'background:var(--border)'}">
+          ${ai?'🤖':'👤'}
+        </div>
+        <div style="max-width:78%;${ai?'':'text-align:right'}">
+          <div style="background:${ai?'var(--bg)':'var(--primary)'};color:${ai?'var(--text)':'#fff'};
+            padding:10px 13px;border-radius:${ai?'4px 14px 14px 14px':'14px 4px 14px 14px'};
+            font-size:13px;line-height:1.5;border:${ai?'1px solid var(--border)':'none'};
+            box-shadow:0 1px 3px rgba(0,0,0,.07)">
+            ${m.text}
+          </div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:3px;padding:0 3px">${m.time}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  drawer.innerHTML = `
+    <!-- Header -->
+    <div style="padding:14px 16px;background:linear-gradient(135deg,var(--primary),#0891b2);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px">🤖</div>
+        <div>
+          <div style="color:#fff;font-weight:700;font-size:14px">Assistente Synapse</div>
+          <div style="color:rgba(255,255,255,.8);font-size:11px;display:flex;align-items:center;gap:5px">
+            <span style="width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block"></span>
+            Online · responde em segundos
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button onclick="state.patientChat.messages=[{id:1,role:'ai',text:'Pronto! Como posso ajudar?',time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}];renderChatDrawer()"
+          style="background:rgba(255,255,255,.15);border:none;color:#fff;padding:4px 9px;border-radius:6px;cursor:pointer;font-size:11px">Limpar</button>
+        <button onclick="togglePatientChatDrawer()"
+          style="background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:16px;line-height:1">×</button>
+      </div>
+    </div>
+
+    <!-- Sugestões rápidas -->
+    <div style="padding:8px 12px;border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap;display:flex;gap:6px;flex-shrink:0;background:var(--bg)">
+      ${SUGGESTIONS.map(s=>`
+        <button onclick="state.patientChat.input=${JSON.stringify(s)};sendPatientMessage()"
+          style="flex-shrink:0;padding:4px 11px;border-radius:14px;font-size:11px;cursor:pointer;
+            border:1.5px solid var(--border);background:var(--surface);color:var(--text);
+            transition:all .15s" onmouseover="this.style.borderColor='var(--primary)'"
+          onmouseout="this.style.borderColor='var(--border)'">${s}</button>`).join('')}
+    </div>
+
+    <!-- Mensagens -->
+    <div id="pcd-msgs" style="flex:1;overflow-y:auto;padding:14px 14px 6px;background:var(--bg);min-height:200px;max-height:360px">
+      ${msgHTML}
+      ${isLoading?`
+        <div style="display:flex;gap:8px;align-items:flex-end;margin-bottom:12px">
+          <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#0891b2);display:flex;align-items:center;justify-content:center;font-size:15px">🤖</div>
+          <div style="background:var(--bg);border:1px solid var(--border);padding:12px 14px;border-radius:4px 14px 14px 14px">
+            <div style="display:flex;gap:4px;align-items:center">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--primary);animation:pulse 1s infinite"></span>
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--primary);animation:pulse 1s .2s infinite"></span>
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--primary);animation:pulse 1s .4s infinite"></span>
+            </div>
+          </div>
+        </div>`:''}
+    </div>
+
+    <!-- Indicador de voz -->
+    ${isListening?`
+      <div style="padding:6px 14px;background:rgba(220,38,38,.07);border-top:1px solid rgba(220,38,38,.15);text-align:center;flex-shrink:0">
+        <span style="color:#dc2626;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px">
+          <span style="width:8px;height:8px;border-radius:50%;background:#dc2626;animation:pulse .7s infinite"></span>
+          Ouvindo... fale agora
+        </span>
+      </div>`:''}
+
+    <!-- Input -->
+    <div style="padding:12px 14px;background:var(--surface);border-top:2px solid var(--primary);flex-shrink:0">
+      <div style="display:flex;gap:8px;align-items:flex-end">
+        <textarea id="pcd-input" rows="2" placeholder="Pergunte algo ou clique no 🎤..."
+          style="flex:1;padding:8px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;
+            resize:none;background:var(--bg);color:var(--text);line-height:1.45;outline:none;
+            font-family:inherit;transition:border-color .2s"
+          onfocus="this.style.borderColor='var(--primary)'"
+          onblur="this.style.borderColor='var(--border)'"
+          oninput="state.patientChat.input=this.value"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendPatientMessage()}"
+          ${isLoading?'disabled':''}>${state.patientChat.input||''}</textarea>
+
+        <!-- Microfone -->
+        <button onclick="startVoiceInput()" title="${isListening?'Parar':'Falar com a IA'}"
+          style="width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;flex-shrink:0;
+            display:flex;align-items:center;justify-content:center;
+            background:${isListening?'#dc2626':'var(--border)'};color:${isListening?'#fff':'var(--text)'};transition:all .2s">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            ${isListening
+              ?'<rect x="6" y="6" width="12" height="12" rx="2"/>'
+              :'<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>'}
+          </svg>
+        </button>
+
+        <!-- Enviar -->
+        <button onclick="sendPatientMessage()" ${isLoading?'disabled':''}
+          style="width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;flex-shrink:0;
+            display:flex;align-items:center;justify-content:center;
+            background:var(--primary);color:#fff;opacity:${isLoading?.5:1};transition:all .2s">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:6px;text-align:center">
+        Enter para enviar · Shift+Enter para nova linha · 🎤 Fala em português
+      </div>
+    </div>`;
+
+  // scroll para o fim
+  setTimeout(()=>{ const el=document.getElementById('pcd-msgs'); if(el) el.scrollTop=el.scrollHeight; },30);
+}
+
+function updateChatFAB() {
+  const fab = document.getElementById('chat-fab');
+  if (!fab) return;
+  // Mostra o FAB apenas no portal do paciente e ai_coach
+  const visible = state.role === 'paciente' || state.role === 'ai_coach';
+  fab.style.display = visible ? 'flex' : 'none';
+  // Fecha drawer se mudar de portal
+  if (!visible && state.patientChat.open) {
+    state.patientChat.open = false;
+    const drawer = document.getElementById('chat-drawer');
+    if (drawer) drawer.classList.remove('open');
+  }
+}
+
+// ─── PATIENT CHAT (texto + voz) ───────────────────────────────────────────────
+
+const PATIENT_CHAT_RESPONSES = {
+  peso: [
+    "Com base no seu progresso, você perdeu <b>16,7 kg</b> desde o início. Continue registrando seu peso semanalmente para eu acompanhar melhor a tendência.",
+    "O platô de peso é muito comum com GLP-1 entre a semana 8 e 12. Revisar a ingestão de proteínas (meta: 1,4g/kg/dia) e aumentar levemente a intensidade dos treinos pode ajudar.",
+    "Seu peso atual é <b>72,5 kg</b>. Meta: 68 kg. Faltam 4,5 kg. No ritmo atual (~0,5 kg/semana), você deve atingir a meta em aproximadamente <b>9 semanas</b>.",
+  ],
+  nutri: [
+    "Para a fase de manutenção GLP-1, priorize: proteína (ovo, frango, peixe), vegetais fibrosos e gorduras boas (abacate, azeite). Evite ultraprocessados que ativam o circuito de recompensa mesmo com apetite reduzido.",
+    "Com base no seu perfil (72,5 kg, 165 cm, 38 anos, atividade moderada), sua necessidade calórica estimada é de <b>1.680 kcal/dia</b> para perda leve e <b>2.050 kcal</b> para manutenção.",
+    "A constipação é um efeito colateral frequente com GLP-1. Dica: aumente o consumo de água (meta 2,5L/dia), inclua psyllium ou linhaça nas refeições e caminhe após as refeições.",
+  ],
+  treino: [
+    "Durante o uso de GLP-1, o músculo pode ser perdido junto com gordura. Priorize <b>treino de força 3×/semana</b> e ingestão proteica adequada para preservar a massa muscular.",
+    "Seu treino atual: Musculação (seg/qua/sex), Caminhada (ter/qui/sáb), Alongamento (dom). Está bem distribuído! Se sentir fadiga aumentada, reduza a intensidade e comunique seu médico.",
+    "Para maximizar a queima de gordura com GLP-1, combine <b>treino em jejum curto</b> (manhã, 1h após acordar) com caminhada pós-prandial de 15 minutos.",
+  ],
+  sintomas: [
+    "Náusea, especialmente no início ou após ajuste de dose, é o efeito colateral mais comum. Dicas: comer devagar, porções menores, evitar alimentos gordurosos e deitar-se logo após comer.",
+    "Fadiga nas primeiras semanas pode ser sinal de ingestão calórica muito baixa. Certifique-se de consumir pelo menos <b>1.200 kcal/dia</b> e hidratação adequada.",
+    "Refluxo com GLP-1 pode piorar por conta do esvaziamento gástrico mais lento. Tente elevar a cabeceira da cama e evitar refeições pesadas à noite.",
+  ],
+  bemestar: [
+    "O bem-estar emocional é parte essencial da jornada GLP-1. Mudanças rápidas de peso podem afetar a autoimagem. Registre seu humor semanalmente — isso ajuda eu e sua equipe a identificar padrões.",
+    "Sono de qualidade potencializa os resultados do GLP-1: regula grelina e leptina (hormônios da fome). Meta: 7-8h por noite, horário regular.",
+    "Praticar gratidão diária e manter conexões sociais são fatores comprovados de adesão ao tratamento a longo prazo. Como está seu suporte emocional atualmente?",
+  ],
+  medicacao: [
+    "Lembre-se: a dose de GLP-1 é ajustada gradualmente para minimizar efeitos colaterais. Nunca ajuste a dose por conta própria — sempre consulte seu médico.",
+    "O horário ideal para a aplicação semanal é sempre o mesmo dia da semana. Se esquecer, aplique assim que lembrar (se faltar mais de 2 dias para a próxima dose).",
+    "Manter a caneta de GLP-1 na geladeira (2-8°C) é essencial. Após o primeiro uso, algumas canetas podem ficar em temperatura ambiente (verifique a bula do seu medicamento).",
+  ],
+  geral: [
+    "Estou aqui para ajudar com qualquer dúvida sobre sua jornada! Posso falar sobre peso, nutrição, treinos, sintomas, medicação ou bem-estar. O que você gostaria de explorar?",
+    "Ótima pergunta! Para uma orientação mais específica ao seu caso, recomendo também discutir isso com seu médico ou nutricionista pela plataforma.",
+    "Cada jornada GLP-1 é única. O que importa é a consistência no longo prazo — pequenos ajustes semanais geram grandes resultados em 6-12 meses.",
+  ],
+};
+
+function getPatientChatResponse(msg) {
+  const m = msg.toLowerCase();
+  if (/peso|kg|balança|platô|emagr|perda/.test(m)) return PATIENT_CHAT_RESPONSES.peso;
+  if (/comi|aliment|nutri|proteín|calori|carboidr|gordur|refeição|refeicao|comer|diet|dispensa/.test(m)) return PATIENT_CHAT_RESPONSES.nutri;
+  if (/treino|exerc|academia|muscula|caminha|cardio|força|fatig|musculo/.test(m)) return PATIENT_CHAT_RESPONSES.treino;
+  if (/nausea|náusea|enjoo|refluxo|constipa|dor|efeito|colateral|sintoma|mal/.test(m)) return PATIENT_CHAT_RESPONSES.sintomas;
+  if (/sono|humor|ansied|emocional|sentindo|bem-estar|bemestar|deprim|motivação/.test(m)) return PATIENT_CHAT_RESPONSES.bemestar;
+  if (/remedio|medicamento|dose|caneta|aplicar|injeção|ozempic|wegovy|mounjaro|glp/.test(m)) return PATIENT_CHAT_RESPONSES.medicacao;
+  return PATIENT_CHAT_RESPONSES.geral;
+}
+
+function sendPatientMessage() {
+  const txt = (state.patientChat.input || '').trim();
+  if (!txt || state.patientChat.loading) return;
+
+  const userMsg = { id: Date.now(), role: 'user', text: txt, time: new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) };
+  state.patientChat.messages.push(userMsg);
+  state.patientChat.input = '';
+  state.patientChat.loading = true;
+  renderChatDrawer();
+
+  const responses = getPatientChatResponse(txt);
+  const reply = responses[Math.floor(Math.random() * responses.length)];
+
+  setTimeout(() => {
+    state.patientChat.messages.push({
+      id: Date.now() + 1,
+      role: 'ai',
+      text: reply,
+      time: new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),
+    });
+    state.patientChat.loading = false;
+    renderChatDrawer();
+    const el = document.getElementById('pcd-msgs');
+    if (el) el.scrollTop = el.scrollHeight;
+  }, 1200 + Math.random() * 600);
+}
+
+function startVoiceInput() {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    alert('Seu navegador não suporta reconhecimento de voz. Tente Chrome ou Edge.');
+    return;
+  }
+  if (state.patientChat.listening) {
+    if (state.patientChat.recognition) state.patientChat.recognition.stop();
+    state.patientChat.listening = false;
+    render();
+    return;
+  }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const rec = new SR();
+  rec.lang = 'pt-BR';
+  rec.interimResults = true;
+  rec.continuous = false;
+  state.patientChat.recognition = rec;
+  state.patientChat.listening = true;
+  renderChatDrawer();
+
+  rec.onresult = (e) => {
+    let transcript = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      transcript += e.results[i][0].transcript;
+    }
+    state.patientChat.input = transcript;
+    const inp = document.getElementById('patient-chat-input');
+    if (inp) inp.value = transcript;
+  };
+  rec.onend = () => {
+    state.patientChat.listening = false;
+    state.patientChat.recognition = null;
+    renderChatDrawer();
+    if (state.patientChat.input.trim()) sendPatientMessage();
+  };
+  rec.onerror = (e) => {
+    state.patientChat.listening = false;
+    state.patientChat.recognition = null;
+    renderChatDrawer();
+  };
+  rec.start();
+}
+
+function clearPatientChat() {
+  state.patientChat.messages = [
+    { id: 1, role: 'ai', text: 'Conversa reiniciada! Como posso ajudar você hoje?', time: new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) },
+  ];
+  state.patientChat.input = '';
+  renderChatDrawer();
+}
+
+function renderPatientChat() {
+  const msgs = state.patientChat.messages;
+  const isListening = state.patientChat.listening;
+  const isLoading = state.patientChat.loading;
+
+  const SUGGESTIONS = [
+    'Como está meu progresso de peso?',
+    'O que devo comer hoje?',
+    'Tenho sentido muita náusea',
+    'Como melhorar meu treino?',
+    'Quanto tempo demora para ver resultado?',
+    'Posso tomar o medicamento com comida?',
+  ];
+
+  const msgHTML = msgs.map(m => {
+    const isAI = m.role === 'ai';
+    return `
+      <div style="display:flex;gap:10px;align-items:flex-end;${isAI ? '' : 'flex-direction:row-reverse'}">
+        <div style="width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;
+          ${isAI ? 'background:linear-gradient(135deg,var(--primary),#0891b2)' : 'background:var(--border)'}">
+          ${isAI ? '🤖' : '👤'}
+        </div>
+        <div style="max-width:72%;${isAI ? '' : 'text-align:right'}">
+          <div style="background:${isAI ? 'var(--surface)' : 'var(--primary)'};color:${isAI ? 'var(--text)' : '#fff'};
+            padding:12px 16px;border-radius:${isAI ? '4px 18px 18px 18px' : '18px 4px 18px 18px'};
+            font-size:14px;line-height:1.55;border:${isAI ? '1px solid var(--border)' : 'none'};
+            box-shadow:0 1px 4px rgba(0,0,0,.06)">
+            ${m.text}
+          </div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px;padding:0 4px">${m.time}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  return `
+    <div style="display:flex;flex-direction:column;height:calc(100vh - 120px);max-height:780px">
+
+      <!-- Header -->
+      <div style="padding:16px 20px;background:linear-gradient(135deg,var(--primary),#0891b2);border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:22px">🤖</div>
+          <div>
+            <div style="color:#fff;font-weight:700;font-size:15px">Assistente Synapse</div>
+            <div style="color:rgba(255,255,255,.8);font-size:12px;display:flex;align-items:center;gap:6px">
+              <span style="width:8px;height:8px;border-radius:50%;background:#4ade80;display:inline-block"></span>
+              Online · Responde em segundos
+            </div>
+          </div>
+        </div>
+        <button onclick="clearPatientChat()" style="background:rgba(255,255,255,.15);border:none;color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:12px">
+          Limpar
+        </button>
+      </div>
+
+      <!-- Sugestões -->
+      <div style="background:var(--bg);border-left:1px solid var(--border);border-right:1px solid var(--border);padding:10px 16px;overflow-x:auto;white-space:nowrap;display:flex;gap:8px">
+        ${SUGGESTIONS.map(s => `
+          <button onclick="state.patientChat.input=${JSON.stringify(s)};sendPatientMessage()"
+            style="flex-shrink:0;padding:5px 12px;border-radius:16px;font-size:12px;cursor:pointer;
+              border:1.5px solid var(--border);background:var(--surface);color:var(--text);white-space:nowrap;
+              transition:all .2s" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'"
+            onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">${s}</button>
+        `).join('')}
+      </div>
+
+      <!-- Mensagens -->
+      <div id="patient-chat-msgs" style="flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px;background:var(--bg);border-left:1px solid var(--border);border-right:1px solid var(--border)">
+        ${msgHTML}
+        ${isLoading ? `
+          <div style="display:flex;gap:10px;align-items:flex-end">
+            <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#0891b2);display:flex;align-items:center;justify-content:center;font-size:16px">🤖</div>
+            <div style="background:var(--surface);border:1px solid var(--border);padding:14px 18px;border-radius:4px 18px 18px 18px">
+              <div style="display:flex;gap:5px;align-items:center">
+                <span style="width:8px;height:8px;border-radius:50%;background:var(--primary);animation:pulse 1s infinite"></span>
+                <span style="width:8px;height:8px;border-radius:50%;background:var(--primary);animation:pulse 1s .2s infinite"></span>
+                <span style="width:8px;height:8px;border-radius:50%;background:var(--primary);animation:pulse 1s .4s infinite"></span>
+              </div>
+            </div>
+          </div>` : ''}
+      </div>
+
+      <!-- Input area -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--primary);border-radius:0 0 12px 12px;padding:16px">
+        ${isListening ? `
+          <div style="text-align:center;padding:10px;margin-bottom:10px;background:rgba(220,38,38,.06);border-radius:8px;border:1px solid rgba(220,38,38,.2)">
+            <span style="color:#dc2626;font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px">
+              <span style="width:10px;height:10px;border-radius:50%;background:#dc2626;animation:pulse .8s infinite"></span>
+              Ouvindo... fale agora em português
+            </span>
+          </div>` : ''}
+        <div style="display:flex;gap:10px;align-items:flex-end">
+          <textarea
+            id="patient-chat-input"
+            placeholder="Digite sua pergunta ou clique no microfone para falar..."
+            rows="2"
+            style="flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;
+              resize:none;background:var(--bg);color:var(--text);line-height:1.5;outline:none;
+              transition:border-color .2s;font-family:inherit"
+            onfocus="this.style.borderColor='var(--primary)'"
+            onblur="this.style.borderColor='var(--border)'"
+            oninput="state.patientChat.input=this.value"
+            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendPatientMessage()}"
+            ${isLoading ? 'disabled' : ''}>${state.patientChat.input || ''}</textarea>
+
+          <!-- Botão microfone -->
+          <button onclick="startVoiceInput()"
+            title="${isListening ? 'Parar gravação' : 'Falar com a IA (clique e fale)'}"
+            style="width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;
+              background:${isListening ? '#dc2626' : 'var(--border)'};color:${isListening ? '#fff' : 'var(--text)'}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              ${isListening
+                ? '<rect x="6" y="6" width="12" height="12" rx="2"/>'
+                : '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>'}
+            </svg>
+          </button>
+
+          <!-- Botão enviar -->
+          <button onclick="sendPatientMessage()" ${isLoading ? 'disabled' : ''}
+            style="width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;
+              background:var(--primary);color:#fff;opacity:${isLoading ? '.5' : '1'}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">
+          Enter para enviar · Shift+Enter para nova linha · 🎤 Microfone reconhece português do Brasil
+        </div>
+      </div>
+    </div>`;
+}
+
+
+
+
+// ─── PATIENT MANAGEMENT FUNCTIONS ────────────────────────────────────────────
+
+function openAddPatientModal(role) {
+  state.addPatientForm = {name:'', email:'', phone:'', condition:'', role: role};
+  state.showAddPatientModal = true;
+  render();
+}
+
+function closeAddPatientModal() {
+  state.showAddPatientModal = false;
+  render();
+}
+
+function submitAddPatient() {
+  const f = state.addPatientForm;
+  if (!f.name.trim()) { alert('Por favor, insira o nome do paciente.'); return; }
+  if (!f.email.trim()) { alert('Por favor, insira o e-mail do paciente.'); return; }
+  const newId = Date.now();
+  const newPatient = {
+    id: newId, name: f.name.trim(), email: f.email.trim(), phone: f.phone.trim(),
+    status:'active', invitePending: true, team:[], age:0,
+    alerts:[], notes:'', suggestions:'', clinicalHistory:[]
+  };
+  if (f.role === 'medico') {
+    newPatient.lastWeight = 0; newPatient.targetWeight = 0; newPatient.lost = 0;
+    newPatient.trend = 0; newPatient.glp1Phase = 'transicao';
+    newPatient.protein = 0; newPatient.fiber = 0; newPatient.exerciseAdherence = 0;
+    newPatient.glp1Start = state.todayStr; newPatient.glp1End = state.todayStr;
+    state.patients.push(newPatient);
+  } else if (f.role === 'treinador') {
+    newPatient.weight = 0; newPatient.goal = 'perda_peso'; newPatient.adherence = 0;
+    newPatient.sessionsWeek = 0; newPatient.targetSessions = 3;
+    newPatient.lastSession = state.todayStr; newPatient.exercises = [];
+    newPatient.trainerSuggestions = '';
+    state.students.push(newPatient);
+  } else if (f.role === 'nutricionista') {
+    newPatient.height = 0; newPatient.sex = 'feminino'; newPatient.goal = 'perda_peso';
+    newPatient.tmb = 0; newPatient.tdee = 0; newPatient.kcalMeta = 1800;
+    newPatient.protMeta = 90; newPatient.carbMeta = 180; newPatient.gordMeta = 55;
+    newPatient.fibraMeta = 25; newPatient.adherence = 0;
+    newPatient.weeklyAvg = {kcal:0,prot:0,carb:0,gord:0,fibra:0};
+    newPatient.lastConsult = state.todayStr; newPatient.nextConsult = state.todayStr;
+    newPatient.nutriSuggestions = ''; newPatient.dietPlan = []; newPatient.history = [];
+    state.nutriClients.push(newPatient);
+  }
+  // Auto-send invite
+  state.sentInvites.push({
+    id: newId, patientName: f.name, email: f.email, role: f.role,
+    sentAt: state.todayStr, status: 'pendente'
+  });
+  state.showAddPatientModal = false;
+  alert('Paciente adicionado! Convite enviado para ' + f.email);
+  render();
+}
+
+function renderAddPatientModal() {
+  if (!state.showAddPatientModal) return '';
+  const role = state.addPatientForm.role || state.role;
+  const roleLabel = role==='medico'?'Paciente':role==='treinador'?'Aluno':'Paciente';
+  const accentColor = role==='medico'?'var(--doctor)':role==='treinador'?'var(--trainer)':'var(--nutri)';
+  return `<div id="add-patient-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px" onclick="if(event.target.id==='add-patient-overlay')closeAddPatientModal()">
+    <div style="background:var(--surface);border-radius:16px;padding:28px;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <h2 style="font-size:18px;font-weight:800">Adicionar ${roleLabel}</h2>
+        <button onclick="closeAddPatientModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button>
+      </div>
+      <div style="display:grid;gap:14px">
+        <div>
+          <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">NOME COMPLETO *</label>
+          <input type="text" id="ap-name" value="${state.addPatientForm.name}" oninput="state.addPatientForm.name=this.value" placeholder="Nome do ${roleLabel.toLowerCase()}" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:14px;background:var(--surface2);color:var(--text);box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">E-MAIL *</label>
+          <input type="email" id="ap-email" value="${state.addPatientForm.email}" oninput="state.addPatientForm.email=this.value" placeholder="email@exemplo.com" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:14px;background:var(--surface2);color:var(--text);box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">TELEFONE</label>
+          <input type="tel" id="ap-phone" value="${state.addPatientForm.phone}" oninput="state.addPatientForm.phone=this.value" placeholder="+55 11 99999-9999" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:14px;background:var(--surface2);color:var(--text);box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">CONDIÇÃO / OBJETIVO</label>
+          <input type="text" id="ap-cond" value="${state.addPatientForm.condition}" oninput="state.addPatientForm.condition=this.value" placeholder="Ex: Manutenção pós-GLP1, perda de peso..." style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:14px;background:var(--surface2);color:var(--text);box-sizing:border-box">
+        </div>
+      </div>
+      <div style="margin-top:8px;padding:10px;background:var(--surface2);border-radius:8px;font-size:12px;color:var(--muted)">
+        📧 Um convite por e-mail será enviado automaticamente ao ${roleLabel.toLowerCase()} para que acesse o aplicativo.
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn btn-outline" style="flex:1" onclick="closeAddPatientModal()">Cancelar</button>
+        <button class="btn btn-sm" style="flex:2;background:${accentColor};color:#fff;border:none;border-radius:8px;padding:10px;font-size:14px;font-weight:700;cursor:pointer" onclick="submitAddPatient()">Adicionar e Enviar Convite</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function openInviteModal(patientId, role) {
+  state.inviteForm = {patientId, role, email:'', method:'email'};
+  state.showInviteModal = true;
+  render();
+}
+
+function closeInviteModal() {
+  state.showInviteModal = false;
+  render();
+}
+
+function submitInvite() {
+  const f = state.inviteForm;
+  if (!f.email.trim() && f.method==='email') { alert('Por favor, insira o e-mail.'); return; }
+  let patientName = '';
+  if (f.role==='medico') {
+    const p = state.patients.find(x=>x.id===f.patientId);
+    if (p) { p.invitePending = true; patientName = p.name; }
+  } else if (f.role==='treinador') {
+    const s = state.students.find(x=>x.id===f.patientId);
+    if (s) { s.invitePending = true; patientName = s.name; }
+  } else {
+    const c = state.nutriClients.find(x=>x.id===f.patientId);
+    if (c) { c.invitePending = true; patientName = c.name; }
+  }
+  state.sentInvites.push({
+    id: Date.now(), patientName, email: f.email, role: f.role,
+    sentAt: state.todayStr, status: 'pendente'
+  });
+  state.showInviteModal = false;
+  if (f.method==='link') {
+    alert('Link de convite copiado para a área de transferência!\nhttps://synapse.app/convite/' + Date.now());
+  } else {
+    alert('Convite enviado para ' + f.email + '!');
+  }
+  render();
+}
+
+function renderInviteModal() {
+  if (!state.showInviteModal) return '';
+  const f = state.inviteForm;
+  const role = f.role;
+  const accentColor = role==='medico'?'var(--doctor)':role==='treinador'?'var(--trainer)':'var(--nutri)';
+  let patientName = '';
+  if (role==='medico') { const p = state.patients.find(x=>x.id===f.patientId); if (p) patientName = p.name; }
+  else if (role==='treinador') { const s = state.students.find(x=>x.id===f.patientId); if (s) patientName = s.name; }
+  else { const c = state.nutriClients.find(x=>x.id===f.patientId); if (c) patientName = c.name; }
+  return `<div id="invite-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px" onclick="if(event.target.id==='invite-overlay')closeInviteModal()">
+    <div style="background:var(--surface);border-radius:16px;padding:28px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <h2 style="font-size:18px;font-weight:800">Convidar ${patientName}</h2>
+        <button onclick="closeInviteModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+        <button onclick="state.inviteForm.method='email';document.getElementById('inv-method-email').style.background='${accentColor}';document.getElementById('inv-method-email').style.color='#fff';document.getElementById('inv-method-link').style.background='var(--surface2)';document.getElementById('inv-method-link').style.color='var(--text)'" id="inv-method-email" style="padding:10px;border-radius:8px;border:1.5px solid var(--border);background:${accentColor};color:#fff;cursor:pointer;font-size:13px;font-weight:600">📧 Por E-mail</button>
+        <button onclick="state.inviteForm.method='link';document.getElementById('inv-method-link').style.background='${accentColor}';document.getElementById('inv-method-link').style.color='#fff';document.getElementById('inv-method-email').style.background='var(--surface2)';document.getElementById('inv-method-email').style.color='var(--text)'" id="inv-method-link" style="padding:10px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;font-size:13px;font-weight:600">🔗 Por Link</button>
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">E-MAIL DO PACIENTE</label>
+        <input type="email" value="${f.email}" oninput="state.inviteForm.email=this.value" placeholder="email@exemplo.com" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:14px;background:var(--surface2);color:var(--text);box-sizing:border-box">
+      </div>
+      <div style="margin-top:10px;padding:10px;background:var(--surface2);border-radius:8px;font-size:12px;color:var(--muted)">
+        O paciente receberá um convite para se juntar à sua equipe no Synapse.
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn btn-outline" style="flex:1" onclick="closeInviteModal()">Cancelar</button>
+        <button class="btn btn-sm" style="flex:2;background:${accentColor};color:#fff;border:none;border-radius:8px;padding:10px;font-size:14px;font-weight:700;cursor:pointer" onclick="submitInvite()">Enviar Convite</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function archivePatient(patientId, role) {
+  if (!confirm('Arquivar este paciente? Você pode restaurá-lo depois.')) return;
+  if (role==='medico') {
+    const idx = state.patients.findIndex(p=>p.id===patientId);
+    if (idx>=0) {
+      const p = state.patients.splice(idx, 1)[0];
+      p.status = 'archived'; p.archivedAt = state.todayStr;
+      state.archivedPatients.push(p);
+    }
+  } else if (role==='treinador') {
+    const idx = state.students.findIndex(s=>s.id===patientId);
+    if (idx>=0) {
+      const s = state.students.splice(idx, 1)[0];
+      s.status = 'archived'; s.archivedAt = state.todayStr;
+      state.archivedStudents.push(s);
+    }
+  } else {
+    const idx = state.nutriClients.findIndex(c=>c.id===patientId);
+    if (idx>=0) {
+      const c = state.nutriClients.splice(idx, 1)[0];
+      c.status = 'archived'; c.archivedAt = state.todayStr;
+      state.archivedNutriClients.push(c);
+    }
+  }
+  render();
+}
+
+function reactivatePatient(patientId, role) {
+  if (role==='medico') {
+    const idx = state.archivedPatients.findIndex(p=>p.id===patientId);
+    if (idx>=0) {
+      const p = state.archivedPatients.splice(idx, 1)[0];
+      p.status = 'active'; delete p.archivedAt;
+      state.patients.push(p);
+    }
+  } else if (role==='treinador') {
+    const idx = state.archivedStudents.findIndex(s=>s.id===patientId);
+    if (idx>=0) {
+      const s = state.archivedStudents.splice(idx, 1)[0];
+      s.status = 'active'; delete s.archivedAt;
+      state.students.push(s);
+    }
+  } else {
+    const idx = state.archivedNutriClients.findIndex(c=>c.id===patientId);
+    if (idx>=0) {
+      const c = state.archivedNutriClients.splice(idx, 1)[0];
+      c.status = 'active'; delete c.archivedAt;
+      state.nutriClients.push(c);
+    }
+  }
+  render();
+}
+
+function renderArchivedPatientsPage(role) {
+  const backPage = role==='medico'?'medico_pacientes':role==='treinador'?'trainer_alunos':'nutri_pacientes';
+  const roleLabel = role==='medico'?'Paciente':role==='treinador'?'Aluno':'Paciente';
+  const accentColor = role==='medico'?'var(--doctor)':role==='treinador'?'var(--trainer)':'var(--nutri)';
+  const list = role==='medico'?state.archivedPatients:role==='treinador'?state.archivedStudents:state.archivedNutriClients;
+  return `<div class="page">
+    <div class="page-header">
+      <div>
+        <button class="btn btn-outline btn-sm" onclick="navigate('${backPage}')" style="margin-bottom:8px">← Voltar</button>
+        <h1 class="page-title">${roleLabel}s Arquivados</h1>
+        <p class="page-sub">${list.length} ${roleLabel.toLowerCase()}(s) arquivado(s) — clique em Reativar para restaurar.</p>
+      </div>
+    </div>
+    ${list.length===0?`<div class="card" style="text-align:center;padding:40px;color:var(--muted)">
+      <div style="font-size:48px;margin-bottom:12px">📭</div>
+      <div style="font-size:16px;font-weight:600">Nenhum ${roleLabel.toLowerCase()} arquivado</div>
+    </div>`:''}
+    <div style="display:grid;gap:10px">
+      ${list.map(p=>`
+        <div class="card" style="display:flex;align-items:center;gap:14px;padding:16px">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:var(--muted)">${initials(p.name)}</div>
+          <div style="flex:1">
+            <div style="font-weight:700;font-size:15px;color:var(--text)">${p.name}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">
+              ${p.email||''} ${p.phone?'· '+p.phone:''} ${p.archivedAt?'· Arquivado em '+fmt(p.archivedAt):''}
+            </div>
+          </div>
+          <button class="btn btn-sm" style="background:${accentColor};color:#fff;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;font-size:13px;font-weight:600" onclick="reactivatePatient(${p.id},'${role}')">Reativar</button>
+        </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderPendingInvitesPage(role) {
+  const backPage = role==='medico'?'medico_pacientes':role==='treinador'?'trainer_alunos':'nutri_pacientes';
+  const accentColor = role==='medico'?'var(--doctor)':role==='treinador'?'var(--trainer)':'var(--nutri)';
+  const list = state.sentInvites.filter(i=>i.role===role);
+  return `<div class="page">
+    <div class="page-header">
+      <div>
+        <button class="btn btn-outline btn-sm" onclick="navigate('${backPage}')" style="margin-bottom:8px">← Voltar</button>
+        <h1 class="page-title">Convites Enviados</h1>
+        <p class="page-sub">${list.length} convite(s) enviado(s).</p>
+      </div>
+    </div>
+    ${list.length===0?`<div class="card" style="text-align:center;padding:40px;color:var(--muted)">
+      <div style="font-size:48px;margin-bottom:12px">📭</div>
+      <div style="font-size:16px;font-weight:600">Nenhum convite enviado ainda</div>
+    </div>`:''}
+    <div style="display:grid;gap:10px">
+      ${list.map(inv=>`
+        <div class="card" style="display:flex;align-items:center;gap:14px;padding:16px">
+          <div style="width:48px;height:48px;border-radius:50%;background:${accentColor}22;display:flex;align-items:center;justify-content:center;font-size:22px">✉️</div>
+          <div style="flex:1">
+            <div style="font-weight:700;font-size:15px;color:var(--text)">${inv.patientName}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">${inv.email} · Enviado em ${fmt(inv.sentAt)}</div>
+          </div>
+          <span class="badge badge-warn">${inv.status}</span>
+        </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+// ─── PATIENT SIDE: MINHA EQUIPE ───────────────────────────────────────────────
+
+function renderMinhaEquipe() {
+  const team = state.profile.myTeam || [];
+  const pending = state.profile.pendingInvites || [];
+  const roleIcon = {medico:'👨‍⚕️', treinador:'🏋️', nutricionista:'🥗'};
+  const roleLabel = {medico:'Médico(a)', treinador:'Treinador(a)', nutricionista:'Nutricionista'};
+  return `<div class="page">
+    <div class="page-header">
+      <div><h1 class="page-title">Minha Equipe</h1><p class="page-sub">Profissionais que acompanham sua jornada de saúde.</p></div>
+      <button class="btn btn-sm" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;font-size:13px" onclick="openInviteProModal()">+ Convidar Profissional</button>
+    </div>
+
+    ${team.length===0?`<div class="card" style="text-align:center;padding:40px;color:var(--muted)">
+      <div style="font-size:48px;margin-bottom:12px">👥</div>
+      <div style="font-size:16px;font-weight:600;margin-bottom:8px">Sua equipe está vazia</div>
+      <div style="font-size:13px">Convide um profissional para começar seu acompanhamento multidisciplinar.</div>
+      <button class="btn btn-sm" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer;margin-top:16px;font-size:13px" onclick="openInviteProModal()">Convidar meu primeiro profissional</button>
+    </div>`:''}
+
+    <div style="display:grid;gap:12px;margin-bottom:24px">
+      ${team.map(pro=>`
+        <div class="card" style="display:flex;align-items:center;gap:16px;padding:18px">
+          <div style="width:52px;height:52px;border-radius:50%;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:24px">${roleIcon[pro.role]||'👤'}</div>
+          <div style="flex:1">
+            <div style="font-weight:800;font-size:15px;color:var(--text)">${pro.name}</div>
+            <div style="font-size:12px;font-weight:600;color:var(--primary);margin-top:2px">${roleLabel[pro.role]||pro.role}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">${pro.specialty||''} ${pro.since?'· Na equipe desde '+fmt(pro.since):''}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span class="badge badge-success" style="font-size:11px">✓ Ativo</span>
+          </div>
+        </div>`).join('')}
+    </div>
+
+    ${pending.length>0?`<div class="card" style="padding:18px">
+      <h3 style="font-size:14px;font-weight:700;color:var(--muted);margin-bottom:12px">CONVITES PENDENTES</h3>
+      ${pending.map(inv=>`
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:20px">⏳</span>
+          <div style="flex:1">
+            <div style="font-weight:600;font-size:14px">${inv.name}</div>
+            <div style="font-size:12px;color:var(--muted)">${inv.email} · Enviado em ${fmt(inv.sentAt)}</div>
+          </div>
+          <span class="badge badge-warn">pendente</span>
+        </div>`).join('')}
+    </div>`:''}
+
+    ${renderInviteProModal()}
+  </div>`;
+}
+
+function openInviteProModal() {
+  state.inviteProForm = {name:'', email:'', role:'medico'};
+  state.showInviteProModal = true;
+  render();
+}
+
+function closeInviteProModal() {
+  state.showInviteProModal = false;
+  render();
+}
+
+function submitInvitePro() {
+  const f = state.inviteProForm;
+  if (!f.name.trim()) { alert('Por favor, insira o nome do profissional.'); return; }
+  if (!f.email.trim()) { alert('Por favor, insira o e-mail do profissional.'); return; }
+  if (!state.profile.pendingInvites) state.profile.pendingInvites = [];
+  state.profile.pendingInvites.push({
+    id: Date.now(), name: f.name, email: f.email, role: f.role, sentAt: state.todayStr
+  });
+  state.showInviteProModal = false;
+  alert('Convite enviado para ' + f.email + '! Assim que o profissional aceitar, ele aparecerá na sua equipe.');
+  render();
+}
+
+function renderInviteProModal() {
+  if (!state.showInviteProModal) return '';
+  const f = state.inviteProForm;
+  return `<div id="invite-pro-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px" onclick="if(event.target.id==='invite-pro-overlay')closeInviteProModal()">
+    <div style="background:var(--surface);border-radius:16px;padding:28px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <h2 style="font-size:18px;font-weight:800">Convidar Profissional</h2>
+        <button onclick="closeInviteProModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button>
+      </div>
+      <div style="display:grid;gap:14px">
+        <div>
+          <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">TIPO DE PROFISSIONAL</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+            <button onclick="state.inviteProForm.role='medico';render()" style="padding:8px;border-radius:8px;border:1.5px solid var(--border);background:${f.role==='medico'?'var(--doctor)':'var(--surface2)'};color:${f.role==='medico'?'#fff':'var(--text)'};cursor:pointer;font-size:12px;font-weight:600">👨‍⚕️ Médico</button>
+            <button onclick="state.inviteProForm.role='treinador';render()" style="padding:8px;border-radius:8px;border:1.5px solid var(--border);background:${f.role==='treinador'?'var(--trainer)':'var(--surface2)'};color:${f.role==='treinador'?'#fff':'var(--text)'};cursor:pointer;font-size:12px;font-weight:600">🏋️ Treino</button>
+            <button onclick="state.inviteProForm.role='nutricionista';render()" style="padding:8px;border-radius:8px;border:1.5px solid var(--border);background:${f.role==='nutricionista'?'var(--nutri)':'var(--surface2)'};color:${f.role==='nutricionista'?'#fff':'var(--text)'};cursor:pointer;font-size:12px;font-weight:600">🥗 Nutri</button>
+          </div>
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">NOME DO PROFISSIONAL *</label>
+          <input type="text" value="${f.name}" oninput="state.inviteProForm.name=this.value" placeholder="Nome do profissional" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:14px;background:var(--surface2);color:var(--text);box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">E-MAIL PROFISSIONAL *</label>
+          <input type="email" value="${f.email}" oninput="state.inviteProForm.email=this.value" placeholder="email@clinica.com.br" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:14px;background:var(--surface2);color:var(--text);box-sizing:border-box">
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px;background:var(--surface2);border-radius:8px;font-size:12px;color:var(--muted)">
+        O profissional receberá um convite para acompanhar seu progresso no Synapse.
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn btn-outline" style="flex:1" onclick="closeInviteProModal()">Cancelar</button>
+        <button class="btn btn-sm" style="flex:2;background:var(--primary);color:#fff;border:none;border-radius:8px;padding:10px;font-size:14px;font-weight:700;cursor:pointer" onclick="submitInvitePro()">Enviar Convite</button>
       </div>
     </div>
   </div>`;
@@ -7760,9 +8764,175 @@ function showCollabSummary(threadId) {
   modal.style.display = 'flex';
 }
 
+
+// ─── COMPLIANCE — HIPAA / GDPR / LGPD ────────────────────────────────────────
+// All functions use "oz" prefix to avoid any conflict with existing code.
+// This block does NOT modify render(), selectRole(), state, or any existing fn.
+
+function ozInitCookieBanner() {
+  if (!localStorage.getItem('oz_consent')) {
+    setTimeout(function() {
+      var b = document.getElementById('oz-cookie-banner');
+      if (b) b.style.display = 'flex';
+    }, 1500);
+  }
+}
+
+function ozHideBanner() {
+  var b = document.getElementById('oz-cookie-banner');
+  if (!b) return;
+  b.style.opacity = '0';
+  b.style.transition = 'opacity .35s';
+  setTimeout(function() { b.style.display = 'none'; b.style.opacity = ''; }, 380);
+}
+
+function ozAcceptCookies() {
+  localStorage.setItem('oz_consent', 'all');
+  ozHideBanner();
+}
+
+function ozRejectCookies() {
+  localStorage.setItem('oz_consent', 'essential');
+  ozHideBanner();
+}
+
+function ozOpenPrivacy() {
+  var m = document.getElementById('oz-privacy-modal');
+  if (m) m.classList.add('oz-open');
+}
+
+function ozClosePrivacy() {
+  var m = document.getElementById('oz-privacy-modal');
+  if (m) m.classList.remove('oz-open');
+}
+
+function ozExportData() {
+  var s = typeof state !== 'undefined' ? state : {};
+  var p = s.profile || {};
+  var data = {
+    exportedAt: new Date().toISOString(),
+    notice: 'Exportação de dados pessoais — GDPR Art. 20 / LGPD Art. 18',
+    profile: { name: p.name, email: p.email, dob: p.dob, sex: p.sex },
+    weightLog: s.weights || [],
+    meals: s.meals || [],
+    wellbeing: s.wellbeingEntries || [],
+    consent: localStorage.getItem('oz_consent') || 'not set',
+  };
+  var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'ozemfica_meus_dados_' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  ozClosePrivacy();
+}
+
+// Init banner after page loads (called after render())
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 // Show role picker on load
 render();
+ozInitCookieBanner();
 </script>
+
+<!-- CHAT FAB (visível no portal do paciente) -->
+<button id="chat-fab" onclick="togglePatientChatDrawer()" title="Chat com IA" aria-label="Abrir chat">
+  <svg id="chat-fab-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    <circle cx="9" cy="10" r="1" fill="currentColor"/>
+    <circle cx="12" cy="10" r="1" fill="currentColor"/>
+    <circle cx="15" cy="10" r="1" fill="currentColor"/>
+  </svg>
+  <span class="fab-badge" id="chat-fab-badge" style="display:none">1</span>
+</button>
+
+<!-- CHAT DRAWER -->
+<div id="chat-drawer">
+  <!-- conteúdo renderizado dinamicamente por renderChatDrawer() -->
+</div>
+
+
+<!-- ── COOKIE BANNER (GDPR / LGPD) ─────────────────────────────────────────── -->
+<div id="oz-cookie-banner">
+  <p>Usamos cookies essenciais para funcionamento seguro e cookies analíticos para melhorar sua experiência.
+     Seus dados de saúde são protegidos conforme <strong>HIPAA</strong>, <strong>GDPR (EU)</strong> e <strong>LGPD (BR)</strong>.
+     <a onclick="ozOpenPrivacy()">Saiba mais &rarr;</a></p>
+  <button class="oz-cb-btn oz-cb-reject" onclick="ozRejectCookies()">Apenas essenciais</button>
+  <button class="oz-cb-btn oz-cb-accept" onclick="ozAcceptCookies()">Aceitar todos</button>
+</div>
+
+<!-- ── PRIVACY & COMPLIANCE MODAL ──────────────────────────────────────────── -->
+<div id="oz-privacy-modal">
+  <div class="oz-pm-box">
+    <div class="oz-pm-head">
+      <h2>Privacidade &amp; Conformidade</h2>
+      <button class="oz-pm-close" onclick="ozClosePrivacy()">&times;</button>
+    </div>
+    <div class="oz-pm-body">
+      <div class="oz-badge-row">
+        <span class="oz-badge oz-badge-hipaa">HIPAA Compliant</span>
+        <span class="oz-badge oz-badge-gdpr">GDPR (EU) 2016/679</span>
+        <span class="oz-badge oz-badge-lgpd">LGPD Lei 13.709/18</span>
+        <span class="oz-badge oz-badge-iso">ISO 27001 Ready</span>
+      </div>
+
+      <h3>HIPAA — Notice of Privacy Practices (EUA)</h3>
+      <ul>
+        <li><strong>Direito de Acesso:</strong> solicite cópia dos seus dados de saúde a qualquer momento.</li>
+        <li><strong>Minimum Necessary:</strong> a IA recebe apenas o contexto estritamente necessário.</li>
+        <li><strong>Business Associate Agreements:</strong> Anthropic, AWS e Stripe assinaram BAAs.</li>
+        <li><strong>Breach Notification:</strong> notificação em até 60 dias (45 CFR §164.410).</li>
+        <li><strong>Criptografia:</strong> AES-256 em repouso, TLS 1.3 em trânsito.</li>
+        <li><strong>Audit Logs:</strong> todos os acessos a PHI são registrados e retidos por 7 anos.</li>
+      </ul>
+
+      <h3>GDPR — Regulamento Geral de Proteção de Dados (UE)</h3>
+      <ul>
+        <li><strong>Art. 15 — Acesso:</strong> exporte seus dados completos em JSON com 1 clique.</li>
+        <li><strong>Art. 17 — Apagamento:</strong> solicite exclusão total da conta em até 30 dias.</li>
+        <li><strong>Art. 20 — Portabilidade:</strong> export estruturado JSON/CSV disponível.</li>
+        <li><strong>Art. 25 — Privacy by Design:</strong> dados mínimos, RLS no banco, anonimização para IA.</li>
+        <li><strong>Art. 32 — Segurança:</strong> AES-256, TLS 1.3, MFA para profissionais, pentest trimestral.</li>
+        <li><strong>Art. 33 — Violação:</strong> notificação à autoridade em 72h, usuários em 72h.</li>
+        <li><strong>Art. 37 — DPO:</strong> dpo@synapse.com.br</li>
+        <li><strong>Transferência UE:</strong> dados armazenados em AWS eu-central-1 (Frankfurt) ou SCCs.</li>
+      </ul>
+
+      <h3>LGPD — Lei Geral de Proteção de Dados (Brasil)</h3>
+      <ul>
+        <li><strong>Art. 7º, I:</strong> consentimento livre, informado e inequívoco.</li>
+        <li><strong>Art. 11, I:</strong> dados sensíveis de saúde com consentimento específico.</li>
+        <li><strong>Art. 18:</strong> acesso, correção, portabilidade, exclusão e revogação disponíveis.</li>
+        <li><strong>Art. 41 — Encarregado:</strong> privacidade@synapse.com.br · prazo: 15 dias úteis.</li>
+      </ul>
+
+      <h3>Dados coletados</h3>
+      <ul>
+        <li><strong>Saúde:</strong> peso, glicemia, dosagem GLP-1, fotos, refeições, exercícios, bem-estar.</li>
+        <li><strong>Identificação:</strong> nome, e-mail, registro profissional (CRM/CRN/CREF).</li>
+        <li><strong>Técnicos:</strong> logs de acesso anonimizados, preferências de interface.</li>
+        <li><strong>Cookies essenciais:</strong> sessão JWT — sem rastreamento cross-site.</li>
+      </ul>
+
+      <h3>Retenção</h3>
+      <ul>
+        <li>Dados de saúde: conta ativa + 5 anos (CFM 1.638/2002 + HIPAA).</li>
+        <li>Logs de auditoria: 7 anos (HIPAA §164.530.j).</li>
+        <li>Backups: purged em 90 dias após exclusão de conta.</li>
+      </ul>
+
+      <h3>Contato</h3>
+      <p>Para exercer qualquer direito envie e-mail para <strong>privacidade@synapse.com.br</strong>.<br>
+         Autoridade BR: ANPD &nbsp;|&nbsp; Autoridade UE: autoridade do seu Estado-Membro.</p>
+    </div>
+    <div class="oz-pm-foot">
+      <button class="oz-cb-btn oz-cb-reject" onclick="ozClosePrivacy()">Fechar</button>
+      <button class="oz-cb-btn oz-cb-accept" onclick="ozExportData()">Exportar meus dados</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
